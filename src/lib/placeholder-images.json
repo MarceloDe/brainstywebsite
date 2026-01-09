@@ -8,21 +8,21 @@
     },
     {
       "id": "translate",
-      "description": "A person intently reading a book in a library, symbolizing the simplification of complex knowledge.",
-      "imageUrl": "https://images.unsplash.com/photo-1595111633191-7a8c1b0f7f98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXJzb24lMjByZWFkaW5nfGVufDB8fHx8MTc2NzkwNzQyMXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person reading"
+      "description": "Close-up of the Brainsty shield logo, focusing on the left side of the brain icon.",
+      "imageUrl": "https://storage.googleapis.com/project-spark-347915-public/__project_images__/8a9391d1-678c-4a7b-a25c-0c1538356950/20240726-031526_0.png",
+      "imageHint": "glowing brain"
     },
     {
       "id": "integrate",
-      "description": "A person using a smartwatch to track their health, representing technology integration.",
-      "imageUrl": "https://images.unsplash.com/photo-1758348844319-6ca57f0a8ea0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c21hcnR3YXRjaCUyMGhlYWx0aHxlbnwwfHx8fDE3Njc5MjAxOTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "smartwatch health"
+      "description": "Close-up of the Brainsty shield logo, focusing on the right side of the brain icon.",
+      "imageUrl": "https://storage.googleapis.com/project-spark-347915-public/__project_images__/8a9391d1-678c-4a7b-a25c-0c1538356950/20240726-031526_1.png",
+      "imageHint": "ai health"
     },
     {
       "id": "delivery",
-      "description": "Two people having a supportive conversation, illustrating the delivery of personalized knowledge.",
-      "imageUrl": "https://images.unsplash.com/photo-1760992003987-efc5259bcfbf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzdXBwb3J0aXZlJTIwY29udmVyc2F0aW9ufGVufDB8fHx8MTc2NzkyMDE5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "supportive conversation"
+      "description": "Wide shot of the Brainsty logo with the glowing brain shield.",
+      "imageUrl": "https://storage.googleapis.com/project-spark-347915-public/__project_images__/8a9391d1-678c-4a7b-a25c-0c1538356950/20240726-031526.png",
+      "imageHint": "empowerment"
     },
     {
       "id": "concierge-diagram",

@@ -1,29 +1,25 @@
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TranslateIcon, IntegrateIcon, DeliveryIcon } from "@/components/shared/icons";
 
 const pillars = [
     {
-        icon: TranslateIcon,
         title: "#Translate",
         description: "We translate complex, evidence-based research into useful, understandable knowledge for the average person.",
         imageId: "translate",
-        imageHint: "person reading",
+        imageHint: "glowing brain",
     },
     {
-        icon: IntegrateIcon,
         title: "#Integrate",
         description: "We integrate modern technology (like AI, wearables, and apps) to build sustainable and engaging health and wellness solutions.",
         imageId: "integrate",
-        imageHint: "smartwatch health",
+        imageHint: "ai health",
     },
     {
-        icon: DeliveryIcon,
         title: "#Delivery",
         description: "We deliver reliable, personalized knowledge that empowers users to make informed health decisions.",
         imageId: "delivery",
-        imageHint: "supportive conversation",
+        imageHint: "empowerment",
     }
 ];
 
@@ -46,25 +42,22 @@ export default function MissionSection() {
                         const pillarImage = getImage(pillar.imageId);
                         return (
                             <Card key={pillar.title} className="flex flex-col">
-                                <CardHeader className="items-center">
-                                    <div className="p-4 bg-accent/20 rounded-full mb-4">
-                                        <pillar.icon className="h-8 w-8 text-primary" />
+                                {pillarImage && (
+                                    <div className="aspect-square relative rounded-t-lg overflow-hidden">
+                                        <Image 
+                                            src={pillarImage.imageUrl}
+                                            alt={pillarImage.description}
+                                            fill
+                                            className="object-cover"
+                                            data-ai-hint={pillarImage.imageHint}
+                                        />
                                     </div>
+                                )}
+                                <CardHeader className="items-center">
                                     <CardTitle className="font-headline text-2xl">{pillar.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="flex-grow flex flex-col text-center">
                                     <p className="text-muted-foreground flex-grow">{pillar.description}</p>
-                                    {pillarImage && (
-                                        <div className="mt-6 aspect-video relative rounded-lg overflow-hidden">
-                                            <Image 
-                                                src={pillarImage.imageUrl}
-                                                alt={pillarImage.description}
-                                                fill
-                                                className="object-cover"
-                                                data-ai-hint={pillarImage.imageHint}
-                                            />
-                                        </div>
-                                    )}
                                 </CardContent>
                             </Card>
                         )
