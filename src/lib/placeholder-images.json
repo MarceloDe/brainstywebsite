@@ -14,9 +14,9 @@
     },
     {
       "id": "mission-integrate",
-      "description": "A person using a smartphone to track their health and fitness data.",
-      "imageUrl": "https://images.unsplash.com/photo-1510017803434-a899398421b3?auto=format&fit=crop&q=80&w=800",
-      "imageHint": "health smartphone"
+      "description": "Close-up on a smartwatch displaying health metrics with a blurred background of a person exercising.",
+      "imageUrl": "https://images.unsplash.com/photo-1511303899144-a6280455940c?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "smartwatch health"
     },
     {
       "id": "mission-delivery",
@@ -35,6 +35,42 @@
       "description": "A doctor and patient looking at a tablet together.",
       "imageUrl": "https://images.unsplash.com/photo-1666214278797-b2cc1b12be76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkb2N0b3IlMjBwYXRpZW50fGVufDB8fHx8MTc2NzkwMzkyNHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "doctor patient"
+    },
+    {
+      "id": "workerbrainsty-hero",
+      "description": "Abstract animation of a pulsating heartbeat that morphs into a complex network graph.",
+      "imageUrl": "https://images.unsplash.com/photo-1647221598479-cbd168d7e8a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwdWxzYXRpbmclMjBuZXR3b3JrfGVufDB8fHx8MTc2NzkyNTg5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pulsating network"
+    },
+    {
+      "id": "workerbrainsty-concierge",
+      "description": "Minimalist 3D isometric wireframe of a stylized brain connecting to various document icons.",
+      "imageUrl": "https://images.unsplash.com/photo-1652214602680-7b1e5ed63bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpc29tZXRyaWMlMjBicmFpbnxlbnwwfHx8fDE3Njc5MjU4OTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "isometric brain"
+    },
+    {
+      "id": "workerbrainsty-design-rigid",
+      "description": "A rigid, robotic arm moving in a linear path.",
+      "imageUrl": "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxyb2JvdGljJTIwYXJtfGVufDB8fHx8MTc2NzkyNTg5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "robotic arm"
+    },
+    {
+      "id": "workerbrainsty-design-adaptive",
+      "description": "An organic, flowing network of interconnected nodes, representing adaptive learning.",
+      "imageUrl": "https://images.unsplash.com/photo-1761498465966-2cee131efcc6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxvcmdhbmljJTIwbmV0d29ya3xlbnwwfHx8fDE3Njc5MjU4OTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "organic network"
+    },
+    {
+      "id": "workerbrainsty-architecture",
+      "description": "An elegant web diagram connecting different tech stack nodes like 'Planner', 'Agent', and 'Graph'.",
+      "imageUrl": "https://images.unsplash.com/photo-1581092157699-83c90752400a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0ZWNoJTIwZGlhZ3JhbXxlbnwwfHx8fDE3Njc5MjU4OTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tech diagram"
+    },
+    {
+      "id": "workerbrainsty-complexity",
+      "description": "An abstract representation of a tangled knot untying itself into straight, orderly lines.",
+      "imageUrl": "https://images.unsplash.com/photo-1554780632-511142996491?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjaGFvcyUyMG9yZGVyfGVufDB8fHx8MTc2Nzg4NDQ1NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chaos order"
     }
   ]
 }
