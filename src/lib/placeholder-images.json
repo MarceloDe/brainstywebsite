@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "A serene natural landscape with a calm body of water, reflecting hope and tranquility.",
+      "imageUrl": "https://images.unsplash.com/photo-1662189793032-ccb6135a9159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzZXJlbmUlMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzY3ODU0MDA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "serene landscape"
+    },
+    {
+      "id": "translate",
+      "description": "A person intently reading a book in a library, symbolizing the simplification of complex knowledge.",
+      "imageUrl": "https://images.unsplash.com/photo-1595111633191-7a8c1b0f7f98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXJzb24lMjByZWFkaW5nfGVufDB8fHx8MTc2NzkwNzQyMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person reading"
+    },
+    {
+      "id": "integrate",
+      "description": "A person using a smartwatch to track their health, representing technology integration.",
+      "imageUrl": "https://images.unsplash.com/photo-1758348844319-6ca57f0a8ea0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c21hcnR3YXRjaCUyMGhlYWx0aHxlbnwwfHx8fDE3Njc5MjAxOTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "smartwatch health"
+    },
+    {
+      "id": "delivery",
+      "description": "Two people having a supportive conversation, illustrating the delivery of personalized knowledge.",
+      "imageUrl": "https://images.unsplash.com/photo-1760992003987-efc5259bcfbf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzdXBwb3J0aXZlJTIwY29udmVyc2F0aW9ufGVufDB8fHx8MTc2NzkyMDE5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "supportive conversation"
+    },
+    {
+      "id": "concierge-diagram",
+      "description": "Abstract diagram representing AI helping a user.",
+      "imageUrl": "https://images.unsplash.com/photo-1738429474664-c3a0f62192f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YWJzdHJhY3QlMjBkaWFncmFtfGVufDB8fHx8MTc2NzgxNzA1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract diagram"
+    },
+    {
+      "id": "features-hero",
+      "description": "A doctor and patient looking at a tablet together.",
+      "imageUrl": "https://images.unsplash.com/photo-1666214278797-b2cc1b12be76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkb2N0b3IlMjBwYXRpZW50fGVufDB8fHx8MTc2NzkwMzkyNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "doctor patient"
+    }
+  ]
 }
