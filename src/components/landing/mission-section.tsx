@@ -13,7 +13,7 @@ const pillars = [
     title: 'Integrate',
     description:
       'We integrate modern technology (like AI, wearables, and apps) to build sustainable and engaging health and wellness solutions.',
-    imageId: 'mission-integrate',
+    imageId: 'mission-integrate-new',
   },
   {
     title: 'Delivery',
