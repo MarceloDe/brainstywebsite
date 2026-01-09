@@ -5,7 +5,7 @@ import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
-import { FileText, Globe, TestTube2, BotMessageSquare, BrainCircuit, GitCommitHorizontal, Unravel } from "lucide-react";
+import { FileText, Globe, TestTube2, BotMessageSquare, BrainCircuit, GitCommitHorizontal, Network } from "lucide-react";
 
 type SectionProps = {
     children: React.ReactNode;
@@ -165,7 +165,7 @@ export default function WorkerBrainstyClient() {
                     {/* 5. Solving Healthcare Complexity */}
                      <div className="h-screen flex items-center justify-center">
                          <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
-                            <Unravel className="h-12 w-12 mx-auto text-primary mb-4" />
+                            <Network className="h-12 w-12 mx-auto text-primary mb-4" />
                             <h2 className="text-3xl md:text-4xl font-bold font-headline">Resource Optimization</h2>
                             <p className="mt-4 text-lg text-foreground/80">We decode the complexity of healthcare resource allocation, transforming raw data streams into synthesized, actionable intelligence.</p>
                         </div>
