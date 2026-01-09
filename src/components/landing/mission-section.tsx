@@ -1,29 +1,28 @@
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DeliveryIcon, IntegrateIcon, TranslateIcon } from "@/components/shared/icons";
 
 const pillars = [
     {
         title: "#Translate",
         description: "We translate complex, evidence-based research into useful, understandable knowledge for the average person.",
-        imageId: "translate",
+        icon: <TranslateIcon className="h-10 w-10 text-primary" />,
     },
     {
         title: "#Integrate",
         description: "We integrate modern technology (like AI, wearables, and apps) to build sustainable and engaging health and wellness solutions.",
-        imageId: "integrate",
+        icon: <IntegrateIcon className="h-10 w-10 text-primary" />,
     },
     {
         title: "#Delivery",
         description: "We deliver reliable, personalized knowledge that empowers users to make informed health decisions.",
-        imageId: "delivery",
+        icon: <DeliveryIcon className="h-10 w-10 text-primary" />,
     }
 ];
 
 
 export default function MissionSection() {
-    const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
-
     return (
         <section className="py-20 md:py-28">
             <div className="container">
@@ -35,31 +34,17 @@ export default function MissionSection() {
                 </div>
 
                 <div className="mt-16 grid md:grid-cols-3 gap-8">
-                    {pillars.map((pillar) => {
-                        const pillarImage = getImage(pillar.imageId);
-                        return (
-                            <Card key={pillar.title} className="flex flex-col">
-                                {pillarImage && (
-                                    <div className="aspect-square relative rounded-t-lg overflow-hidden">
-                                        <Image 
-                                            src={pillarImage.imageUrl}
-                                            alt={pillarImage.description}
-                                            fill
-                                            className="object-cover"
-                                            data-ai-hint={pillarImage.imageHint}
-                                        />
-                                    </div>
-                                )}
-                                <CardHeader className="items-center">
-                                    <CardTitle className="font-headline text-2xl">{pillar.title}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex-grow flex flex-col text-center">
-                                    <p className="text-muted-foreground flex-grow">{pillar.description}</p>
-
-                                </CardContent>
-                            </Card>
-                        )
-                    })}
+                    {pillars.map((pillar) => (
+                        <Card key={pillar.title} className="flex flex-col text-center items-center">
+                             <CardHeader className="items-center">
+                                {pillar.icon}
+                                <CardTitle className="font-headline text-2xl mt-4">{pillar.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex-grow">
+                                <p className="text-muted-foreground">{pillar.description}</p>
+                            </CardContent>
+                        </Card>
+                    ))}
                 </div>
             </div>
         </section>
