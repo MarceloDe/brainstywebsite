@@ -15,6 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 const navLinks = [
   { href: "/features", label: "Features" },
@@ -25,11 +26,14 @@ const navLinks = [
 export default function Header() {
   const { isLoggedIn, logout, isLoading } = useAuth();
   const router = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     router.push("/");
   };
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -79,7 +83,7 @@ export default function Header() {
             </>
           )}
 
-          <Sheet>
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
@@ -87,7 +91,7 @@ export default function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
-              <Link href="/" className="mr-6 flex items-center space-x-2 mb-6">
+              <Link href="/" className="mr-6 flex items-center space-x-2 mb-6" onClick={closeMobileMenu}>
                 <BrainstyLogo className="h-6 w-6" />
                 <span className="font-bold font-headline">Brainsty</span>
               </Link>
@@ -97,6 +101,7 @@ export default function Header() {
                     key={link.href}
                     href={link.href}
                     className="font-medium text-foreground/80"
+                    onClick={closeMobileMenu}
                   >
                     {link.label}
                   </Link>
