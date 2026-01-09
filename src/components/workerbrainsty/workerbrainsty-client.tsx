@@ -98,7 +98,7 @@ export default function WorkerBrainstyClient() {
                         Beyond Automation. Autonomous Intelligence.
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
-                        Meet WorkerBrainsty—the digital resident that doesn&apos;t just read healthcare data; it understands it.
+                        Meet WorkerBrainsty—the digital resident that doesn't just read healthcare data; it understands it.
                     </p>
                 </motion.div>
             </section>
@@ -158,7 +158,7 @@ export default function WorkerBrainstyClient() {
                          <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
                             <GitCommitHorizontal className="h-12 w-12 mx-auto text-primary mb-4" />
                             <h2 className="text-3xl md:text-4xl font-bold font-headline">Autonomous Event Loop</h2>
-                            <p className="mt-4 text-lg text-foreground/80">From &apos;Deep Research&apos; agents to Dynamic Knowledge Graphs, the system operates on a proactive pulse, ensuring you never miss a regulatory shift.</p>
+                            <p className="mt-4 text-lg text-foreground/80">From 'Deep Research' agents to Dynamic Knowledge Graphs, the system operates on a proactive pulse, ensuring you never miss a regulatory shift.</p>
                         </div>
                     </div>
 
