@@ -22,6 +22,8 @@ export default {
         code: ['monospace'],
       },
       colors: {
+        'brain-blue': '#4A90E2',
+        'brain-purple': '#9013FE',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
