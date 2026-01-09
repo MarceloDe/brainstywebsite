@@ -10,39 +10,45 @@ export function BrainstyLogo(props: SVGProps<SVGSVGElement>) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path
-        d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
+      <defs>
+        <linearGradient id="brain-gradient" x1="0" y1="0.5" x2="1" y2="0.5">
+          <stop offset="0%" stopColor="#4A90E2" />
+          <stop offset="100%" stopColor="#9013FE" />
+        </linearGradient>
+      </defs>
+      <path 
+        d="M26.9999 6.24875C26.9999 5.25375 26.2624 4.375 25.3124 4.1875L16.4374 2.34375C16.1524 2.28438 15.8474 2.28438 15.5624 2.34375L6.68741 4.1875C5.73741 4.375 4.99991 5.25375 4.99991 6.24875V14.25C4.99991 22.375 14.3124 29.3125 15.6562 30.0188C15.8624 30.1375 16.1374 30.1375 16.3436 30.0188C17.6874 29.3125 26.9999 22.375 26.9999 14.25V6.24875Z" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
         strokeLinejoin="round"
       />
-      <path
-        d="M16 22V23C12.9624 23 10.5 20.5376 10.5 17.5C10.5 14.4624 12.9624 12 16 12C19.0376 12 21.5 14.4624 21.5 17.5V18.5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
+      <path 
+        d="M16 8V24" 
+        stroke="url(#brain-gradient)" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
         strokeLinejoin="round"
       />
-      <path
-        d="M16 12V9"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
+      <path 
+        d="M16 12C18.2091 12 20 13.7909 20 16C20 18.2091 18.2091 20 16 20" 
+        stroke="url(#brain-gradient)" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
         strokeLinejoin="round"
       />
-      <path
-        d="M13.5 10.5L12 9"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
+      <path 
+        d="M16 8C13.7909 8 12 9.79086 12 12C12 14.2091 13.7909 16 16 16" 
+        stroke="url(#brain-gradient)" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
         strokeLinejoin="round"
       />
-      <path
-        d="M18.5 10.5L20 9"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
+      <path 
+        d="M16 20C13.7909 20 12 21.7909 12 24" 
+        stroke="url(#brain-gradient)" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
         strokeLinejoin="round"
       />
     </svg>
