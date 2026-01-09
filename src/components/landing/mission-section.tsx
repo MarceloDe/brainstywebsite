@@ -5,17 +5,17 @@ import { DeliveryIcon, IntegrateIcon, TranslateIcon } from "@/components/shared/
 
 const pillars = [
     {
-        title: "#Translate",
+        title: "Translate",
         description: "We translate complex, evidence-based research into useful, understandable knowledge for the average person.",
         icon: <TranslateIcon className="h-10 w-10 text-primary" />,
     },
     {
-        title: "#Integrate",
+        title: "Integrate",
         description: "We integrate modern technology (like AI, wearables, and apps) to build sustainable and engaging health and wellness solutions.",
         icon: <IntegrateIcon className="h-10 w-10 text-primary" />,
     },
     {
-        title: "#Delivery",
+        title: "Delivery",
         description: "We deliver reliable, personalized knowledge that empowers users to make informed health decisions.",
         icon: <DeliveryIcon className="h-10 w-10 text-primary" />,
     }
