@@ -7,22 +7,22 @@
       "imageHint": "serene landscape"
     },
     {
-      "id": "translate",
-      "description": "Close-up of the Brainsty shield logo, focusing on the left side of the brain icon.",
-      "imageUrl": "https://storage.googleapis.com/project-spark-347915-public/__project_images__/8a9391d1-678c-4a7b-a25c-0c1538356950/20240726-031526_0.png",
-      "imageHint": "glowing brain"
+      "id": "mission-translate",
+      "description": "A compassionate doctor explaining something to a patient on a tablet.",
+      "imageUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBwYXRpZW50JTIwdGFibGV0fGVufDB8fHx8MTc2NzkxMjAwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "doctor patient"
     },
     {
-      "id": "integrate",
-      "description": "Close-up of the Brainsty shield logo, focusing on the right side of the brain icon.",
-      "imageUrl": "https://storage.googleapis.com/project-spark-347915-public/__project_images__/8a9391d1-678c-4a7b-a25c-0c1538356950/20240726-031526_1.png",
-      "imageHint": "ai health"
+      "id": "mission-integrate",
+      "description": "A person using a smartphone to track their health and fitness data.",
+      "imageUrl": "https://images.unsplash.com/photo-1588665809885-04b381f19a84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxoZWFsdGglMjBhcHB8ZW58MHx8fHwxNzY3OTEyMDM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "health app"
     },
     {
-      "id": "delivery",
-      "description": "Wide shot of the Brainsty logo with the glowing brain shield.",
-      "imageUrl": "https://storage.googleapis.com/project-spark-347915-public/__project_images__/8a9391d1-678c-4a7b-a25c-0c1538356950/20240726-031526.png",
-      "imageHint": "empowerment"
+      "id": "mission-delivery",
+      "description": "A person smiling as they look at personalized health information on a laptop.",
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBsYXB0b3AlMjBoYXBweXxlbnwwfHx8fDE3Njc5MTIxMDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person laptop"
     },
     {
       "id": "concierge-diagram",
