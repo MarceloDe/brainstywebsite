@@ -7,19 +7,16 @@ const pillars = [
         title: "#Translate",
         description: "We translate complex, evidence-based research into useful, understandable knowledge for the average person.",
         imageId: "translate",
-        imageHint: "glowing brain",
     },
     {
         title: "#Integrate",
         description: "We integrate modern technology (like AI, wearables, and apps) to build sustainable and engaging health and wellness solutions.",
         imageId: "integrate",
-        imageHint: "ai health",
     },
     {
         title: "#Delivery",
         description: "We deliver reliable, personalized knowledge that empowers users to make informed health decisions.",
         imageId: "delivery",
-        imageHint: "empowerment",
     }
 ];
 
@@ -58,6 +55,7 @@ export default function MissionSection() {
                                 </CardHeader>
                                 <CardContent className="flex-grow flex flex-col text-center">
                                     <p className="text-muted-foreground flex-grow">{pillar.description}</p>
+
                                 </CardContent>
                             </Card>
                         )
