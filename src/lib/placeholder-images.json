@@ -13,10 +13,10 @@
       "imageHint": "doctor patient"
     },
     {
-      "id": "mission-integrate-new",
-      "description": "A person's wrist with a modern smartwatch displaying health metrics.",
-      "imageUrl": "https://images.unsplash.com/photo-1579586337278-35d18b1d55f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxoZWFsdGglMjBzbWFydHdhdGNofGVufDB8fHx8MTc2NzkxMjA3NHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "health smartwatch"
+      "id": "mission-integrate",
+      "description": "A person using a smartphone to track their health and fitness data.",
+      "imageUrl": "https://images.unsplash.com/photo-1510017803434-a899398421b3?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "health smartphone"
     },
     {
       "id": "mission-delivery",
