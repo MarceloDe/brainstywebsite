@@ -70,7 +70,7 @@ export default function WorkerBrainstyClient() {
         <div className="bg-background text-foreground font-sans">
             {/* 1. Hero Section */}
             <section className="h-screen flex flex-col justify-center items-center text-center relative overflow-hidden">
-                 {heroImage && (
+                {heroImage && (
                     <motion.div
                         initial={{ opacity: 0, scale: 1.2 }}
                         animate={{ opacity: 0.3, scale: 1 }}
@@ -81,11 +81,12 @@ export default function WorkerBrainstyClient() {
                             src={heroImage.imageUrl}
                             alt={heroImage.description}
                             fill
+                            sizes="100vw"
                             className="object-cover"
                             data-ai-hint={heroImage.imageHint}
                             priority
                         />
-                         <div className="absolute inset-0 bg-background/50"></div>
+                        <div className="absolute inset-0 bg-background/50"></div>
                     </motion.div>
                 )}
                 <motion.div
@@ -108,45 +109,45 @@ export default function WorkerBrainstyClient() {
                 {/* Sticky Visuals */}
                 <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
                     <motion.div style={{ opacity: opacityConcierge, scale: scaleConcierge, y: yConcierge }} className="absolute inset-0">
-                         {conciergeImage && <Image src={conciergeImage.imageUrl} alt={conciergeImage.description} fill className="object-contain p-16" data-ai-hint={conciergeImage.imageHint}/>}
+                        {conciergeImage && <Image src={conciergeImage.imageUrl} alt={conciergeImage.description} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-16" data-ai-hint={conciergeImage.imageHint} />}
                     </motion.div>
                     <motion.div style={{ opacity: opacityDesign }} className="absolute inset-0 flex items-center justify-center gap-8 px-8">
                         <div className="w-1/2 h-1/2 relative">
-                            {designRigidImage && <Image src={designRigidImage.imageUrl} alt={designRigidImage.description} fill className="object-contain" data-ai-hint={designRigidImage.imageHint} />}
+                            {designRigidImage && <Image src={designRigidImage.imageUrl} alt={designRigidImage.description} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-contain" data-ai-hint={designRigidImage.imageHint} />}
                         </div>
                         <div className="w-1/2 h-1/2 relative">
-                             {designAdaptiveImage && <Image src={designAdaptiveImage.imageUrl} alt={designAdaptiveImage.description} fill className="object-contain" data-ai-hint={designAdaptiveImage.imageHint} />}
+                            {designAdaptiveImage && <Image src={designAdaptiveImage.imageUrl} alt={designAdaptiveImage.description} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-contain" data-ai-hint={designAdaptiveImage.imageHint} />}
                         </div>
                     </motion.div>
                     <motion.div style={{ opacity: opacityArchitecture }} className="absolute inset-0">
-                        {architectureImage && <Image src={architectureImage.imageUrl} alt={architectureImage.description} fill className="object-contain p-8" data-ai-hint={architectureImage.imageHint} />}
+                        {architectureImage && <Image src={architectureImage.imageUrl} alt={architectureImage.description} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-8" data-ai-hint={architectureImage.imageHint} />}
                     </motion.div>
-                     <motion.div style={{ opacity: opacityComplexity, scale: scaleComplexity, y: yComplexity }} className="absolute inset-0">
-                        {complexityImage && <Image src={complexityImage.imageUrl} alt={complexityImage.description} fill className="object-contain p-8" data-ai-hint={complexityImage.imageHint} />}
+                    <motion.div style={{ opacity: opacityComplexity, scale: scaleComplexity, y: yComplexity }} className="absolute inset-0">
+                        {complexityImage && <Image src={complexityImage.imageUrl} alt={complexityImage.description} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-8" data-ai-hint={complexityImage.imageHint} />}
                     </motion.div>
                 </div>
-                
+
                 {/* Scrolling Text Sections */}
                 <div className="relative z-10">
                     <div className="h-screen"></div>
-                    
+
                     {/* 2. The Expert Concierge */}
                     <div className="h-screen flex items-center justify-center">
-                         <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
+                        <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
                             <BotMessageSquare className="h-12 w-12 mx-auto text-primary mb-4" />
                             <h2 className="text-3xl md:text-4xl font-bold font-headline">Your 24/7 Expert Concierge</h2>
                             <p className="mt-4 text-lg text-foreground/80">Powered by Brainsty AI, it accumulates expertise recursively, distinguishing between noise and critical medical breakthroughs.</p>
                             <div className="flex justify-center gap-4 mt-6 text-muted-foreground">
-                                <FileText className="h-6 w-6"/>
-                                <Globe className="h-6 w-6"/>
-                                <TestTube2 className="h-6 w-6"/>
+                                <FileText className="h-6 w-6" />
+                                <Globe className="h-6 w-6" />
+                                <TestTube2 className="h-6 w-6" />
                             </div>
                         </div>
                     </div>
 
                     {/* 3. Human-Inspired Design */}
-                     <div className="h-screen flex items-center justify-center">
-                         <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
+                    <div className="h-screen flex items-center justify-center">
+                        <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
                             <BrainCircuit className="h-12 w-12 mx-auto text-primary mb-4" />
                             <h2 className="text-3xl md:text-4xl font-bold font-headline">Cognitive Architecture</h2>
                             <p className="mt-4 text-lg text-foreground/80">Unlike rigid scrapers, WorkerBrainsty reasons like a human researcher—planning, critiquing, and diving deep when the data demands it.</p>
@@ -154,8 +155,8 @@ export default function WorkerBrainstyClient() {
                     </div>
 
                     {/* 4. The Architecture */}
-                     <div className="h-screen flex items-center justify-center">
-                         <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
+                    <div className="h-screen flex items-center justify-center">
+                        <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
                             <GitCommitHorizontal className="h-12 w-12 mx-auto text-primary mb-4" />
                             <h2 className="text-3xl md:text-4xl font-bold font-headline">Autonomous Event Loop</h2>
                             <p className="mt-4 text-lg text-foreground/80">From 'Deep Research' agents to Dynamic Knowledge Graphs, the system operates on a proactive pulse, ensuring you never miss a regulatory shift.</p>
@@ -163,8 +164,8 @@ export default function WorkerBrainstyClient() {
                     </div>
 
                     {/* 5. Solving Healthcare Complexity */}
-                     <div className="h-screen flex items-center justify-center">
-                         <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
+                    <div className="h-screen flex items-center justify-center">
+                        <div className="max-w-xl text-center p-8 bg-background/80 backdrop-blur-sm rounded-lg">
                             <Network className="h-12 w-12 mx-auto text-primary mb-4" />
                             <h2 className="text-3xl md:text-4xl font-bold font-headline">Resource Optimization</h2>
                             <p className="mt-4 text-lg text-foreground/80">We decode the complexity of healthcare resource allocation, transforming raw data streams into synthesized, actionable intelligence.</p>

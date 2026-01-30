@@ -53,10 +53,11 @@ export default function MissionSection() {
                       src={image.imageUrl}
                       alt={image.description}
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
                       data-ai-hint={image.imageHint}
                     />
-                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
                   </div>
                 )}
                 <CardHeader>

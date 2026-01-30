@@ -25,6 +25,7 @@ export default function FeaturesPage() {
                         src={heroImage.imageUrl}
                         alt={heroImage.description}
                         fill
+                        sizes="100vw"
                         className="object-cover"
                         data-ai-hint={heroImage.imageHint}
                         priority

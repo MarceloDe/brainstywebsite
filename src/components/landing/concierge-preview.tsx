@@ -39,11 +39,12 @@ export default function ConciergePreview() {
                         <Card>
                             <CardContent className="p-4">
                                 {diagramImage && (
-                                     <div className="aspect-video relative rounded-md overflow-hidden">
+                                    <div className="aspect-video relative rounded-md overflow-hidden">
                                         <Image
                                             src={diagramImage.imageUrl}
                                             alt={diagramImage.description}
                                             fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
                                             className="object-cover"
                                             data-ai-hint={diagramImage.imageHint}
                                         />
