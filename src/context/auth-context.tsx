@@ -1,76 +1,64 @@
 "use client";
 
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { auth, db } from '@/firebase';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  User
+} from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 interface AuthContextType {
-  isLoggedIn: boolean;
+  user: User | null;
   isLoading: boolean;
   login: (email: string, pass: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   signup: (email: string, pass: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate checking for an existing session
-    const checkSession = () => {
-      try {
-        const storedSession = sessionStorage.getItem('isLoggedIn');
-        if (storedSession === 'true') {
-          setIsLoggedIn(true);
-        }
-      } catch (error) {
-        console.error("Could not access session storage:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkSession();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const login = async (email: string, pass: string) => {
-    // Mock login logic
-    console.log("Logging in with", email);
-    await new Promise(resolve => setTimeout(resolve, 500));
-    setIsLoggedIn(true);
-    try {
-      sessionStorage.setItem('isLoggedIn', 'true');
-    } catch (error) {
-      console.error("Could not access session storage:", error);
-    }
+    await signInWithEmailAndPassword(auth, email, pass);
   };
 
-  const logout = () => {
-    setIsLoggedIn(false);
-    try {
-      sessionStorage.removeItem('isLoggedIn');
-    } catch (error) {
-      console.error("Could not access session storage:", error);
-    }
+  const logout = async () => {
+    await signOut(auth);
   };
 
   const signup = async (email: string, pass: string) => {
-    // Mock signup logic
-    console.log("Signing up with", email);
-    await new Promise(resolve => setTimeout(resolve, 500));
-    setIsLoggedIn(true);
-    try {
-      sessionStorage.setItem('isLoggedIn', 'true');
-    } catch (error) {
-      console.error("Could not access session storage:", error);
-    }
+    const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+    const user = userCredential.user;
+
+    // Create user document in Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      email: user.email,
+      createdAt: new Date().toISOString(),
+    });
   };
 
-  const value = { isLoggedIn, isLoading, login, logout, signup };
+  const value = { user, isLoading, login, logout, signup };
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 }

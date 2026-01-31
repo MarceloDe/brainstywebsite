@@ -25,7 +25,7 @@ const navLinks = [
 ];
 
 export default function Header() {
-  const { isLoggedIn, logout, isLoading } = useAuth();
+  const { user, logout, isLoading } = useAuth();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -60,7 +60,7 @@ export default function Header() {
         <div className="flex flex-1 items-center justify-end space-x-2">
           {isLoading ? (
             <div className="h-9 w-20 animate-pulse rounded-md bg-muted" />
-          ) : isLoggedIn ? (
+          ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" size="icon" className="rounded-full">

@@ -10,7 +10,8 @@ const firebaseConfig = {
   "apiKey": "AIzaSyDC886khiOxX49cam0F9QfIUJzzmsvBSgU",
   "authDomain": "studio-2671301810-e0a76.firebaseapp.com",
   "messagingSenderId": "381571846140",
-  "measurementId": ""
+  "measurementId": "",
+  "projectId": "studio-2671301810-e0a76"
 };
 
 const app = initializeApp(firebaseConfig);
