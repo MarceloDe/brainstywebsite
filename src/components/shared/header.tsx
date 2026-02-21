@@ -22,6 +22,7 @@ const navLinks = [
   { href: "/research", label: "Curated Research" },
   { href: "/concierge", label: "AI Concierge" },
   { href: "/workerbrainsty", label: "WorkerBrainsty" },
+  { href: "/repos", label: "Repos" },
 ];
 
 export default function Header() {
