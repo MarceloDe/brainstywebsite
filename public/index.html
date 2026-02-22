@@ -1428,21 +1428,13 @@
       <!-- TAB: SYNC -->
       <div id="tab-sync" class="panel-section" style="margin-bottom:0">
         <div class="panel-section">
-          <h3>🌟 Discover New Stars</h3>
-          <p>Scan your GitHub starred history for repositories that aren't in Brainsty yet. Adds them automatically with
-            a default 3★ fitness.</p>
-          <button class="action-btn purple" onclick="syncNewStarredRepos()">✨ Discover & Add New Stars</button>
-          <div class="status-log" id="sync-new-log" style="min-height:40px;margin-top:8px">Ready to find new stars…
-          </div>
-        </div>
-
-        <div class="panel-section">
-          <h3>🔄 Re-sync Existing Metadata</h3>
-          <p>Fetches live star counts for all 101 repos using GitHub's public API. No auth token required — uses
-            unauthenticated requests (60/hr limit). Batches automatically.</p>
+          <h3>🌌 Full Galaxy Sync</h3>
+          <p>The "Everything" button. Fetches your latest GitHub stars, discovers new repos you haven't added yet,
+            auto-classifies them, and refreshes star counts for existing ones. <strong>Requires GitHub Token.</strong>
+          </p>
           <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-            <button class="action-btn green" onclick="syncStars()">⟳ Sync All Star Counts</button>
-            <button class="action-btn" onclick="syncSingle()">⟳ Sync Single Repo</button>
+            <button class="action-btn purple" onclick="syncStars()">🚀 Run Full Galaxy Sync</button>
+            <button class="action-btn" onclick="syncSingle()">🎯 Sync Single Repo</button>
           </div>
           <div class="input-row" id="single-sync-row" style="display:none">
             <input class="panel-input" id="single-sync-input" placeholder="owner/repo (e.g. langchain-ai/langgraph)">
@@ -1451,7 +1443,7 @@
           <div class="progress-bar-wrap" id="sync-progress-wrap" style="display:none">
             <div class="progress-bar" id="sync-progress"></div>
           </div>
-          <div class="status-log" id="sync-log">Waiting…</div>
+          <div class="status-log" id="sync-log">Waiting for ignition…</div>
         </div>
 
         <div class="panel-section">
@@ -1760,6 +1752,33 @@
       HEALTHCARE_DOMAIN: 'Healthcare Domain', MEMORY_SYSTEMS: 'Memory Systems',
       OCR_DOCUMENT: 'OCR & Documents',
     };
+
+    function autoClassify(repo) {
+      const text = (repo.full_name + ' ' + (repo.tldr || '') + ' ' + (repo.description || '')).toLowerCase();
+      const categories = [];
+      const rules = {
+        AGENTIC_ORCHESTRATION: ['agent', 'orchestration', 'langgraph', 'autogen', 'crewai'],
+        LLM_INFRASTRUCTURE: ['llm', 'infrastructure', 'platform', 'model', 'serve'],
+        CODING_WORKFLOW: ['code', 'programming', 'developer', 'tool', 'workflow'],
+        MCP_INTEGRATION: ['mcp', 'model context protocol'],
+        FRONTEND_UI: ['ui', 'frontend', 'component', 'design', 'web'],
+        RESEARCH_SEARCH: ['search', 'research', 'rag', 'vector'],
+        DATA_EXTRACTION: ['scrape', 'extract', 'parse', 'data'],
+        REASONING_IMPROVEMENT: ['reasoning', 'logic', 'thought', 'chain-of-thought'],
+        BROWSER_AUTOMATION: ['browser', 'selenium', 'playwright', 'automate'],
+        KNOWLEDGE_GRAPH: ['graph', 'knowledge', 'neo4j', 'ontology'],
+        HEALTHCARE_DOMAIN: ['medical', 'health', 'clinical', 'doctor'],
+        MEMORY_SYSTEMS: ['memory', 'long-term', 'state'],
+        OCR_DOCUMENT: ['ocr', 'pdf', 'document', 'vision']
+      };
+
+      for (const [cat, keywords] of Object.entries(rules)) {
+        if (keywords.some(kw => text.includes(kw))) {
+          categories.push(cat);
+        }
+      }
+      return categories;
+    }
     const LANG_COLORS = {
       Python: '#3572A5', TypeScript: '#2b7489', JavaScript: '#f1e05a',
       Go: '#00ADD8', Rust: '#dea584', Shell: '#89e051', HTML: '#e34c26',
@@ -1916,50 +1935,6 @@
       return allStars;
     }
 
-    async function syncNewStarredRepos() {
-      if (!ghToken) { openUpdatePanel('config'); return; }
-
-      try {
-        const githubStars = await fetchAllStarredRepos('MarceloDe', ghToken);
-        const existingNames = new Set(REPOS.map(r => r.full_name));
-        const newRepos = githubStars.filter(s => !existingNames.has(s.full_name));
-
-        if (newRepos.length === 0) {
-          showToast('No new repos found', 'info');
-          return;
-        }
-
-        logLine('sync-new-log', `Found ${newRepos.length} new repos! Adding to Firestore...`, 'ok');
-
-        for (const s of newRepos) {
-          const docId = s.full_name.replace('/', '__');
-          const data = {
-            full_name: s.full_name,
-            categories: [],
-            tldr: s.description || '',
-            fitness: 3, // Default
-            innovation_idea: '',
-            html_url: s.html_url,
-            stars: s.stargazers_count,
-            language: s.language || null,
-            added_at: firebase.firestore.FieldValue.serverTimestamp(),
-            last_synced: firebase.firestore.FieldValue.serverTimestamp(),
-            is_new: true
-          };
-          await db.collection('starred_repos').doc(docId).set(data);
-          REPOS.unshift({ id: docId, ...data });
-        }
-
-        initSideBar();
-        render();
-        updateCounts();
-        showToast(`✓ ${newRepos.length} new repos added`, 'ok');
-      } catch (e) {
-        logLine('sync-new-log', `Sync failed: ${e.message}`, 'err');
-        showToast(`Sync failed: ${e.message}`, 'err');
-      }
-    }
-
     // ─────────────────────────────── INITIALIZATION ──────────────────────────────
     async function startup() {
       // Load token
@@ -1975,7 +1950,7 @@
 
       // Background discovery
       if (ghToken) {
-        syncNewStarredRepos();
+        syncStars(); // Call the comprehensive sync function
       }
     }
 
@@ -2173,44 +2148,84 @@
     }
 
     // ─────────────────────────────── SYNC ────────────────────────────────────────
+    async function starOnGitHub(fullName) {
+      if (!ghToken) return;
+      try {
+        const res = await fetch(`https://api.github.com/user/starred/${fullName}`, {
+          method: 'PUT',
+          headers: { 'Authorization': `token ${ghToken}`, 'Content-Length': '0' }
+        });
+        return res.ok;
+      } catch (e) { return false; }
+    }
+
     async function syncStars() {
+      if (!ghToken) { openUpdatePanel('connectors'); return; }
       const log = document.getElementById('sync-log');
       log.innerHTML = '';
       const progWrap = document.getElementById('sync-progress-wrap');
       const prog = document.getElementById('sync-progress');
       progWrap.style.display = 'block';
-      logLine('sync-log', `Starting sync for ${REPOS.length} repos…`, 'info');
-      let updatedCount = 0, failedCount = 0;
-      const delay = ms => new Promise(r => setTimeout(r, ms));
+      logLine('sync-log', `Starting full sync from GitHub...`, 'info');
 
-      for (let i = 0; i < REPOS.length; i++) {
-        const repo = REPOS[i];
-        prog.style.width = `${Math.round((i / REPOS.length) * 100)}%`;
-        try {
-          const data = await fetchGitHubRepo(repo.full_name);
-          const updates = {
-            stars: data.stargazers_count,
-            tldr: repo.tldr || data.description || '',
-            language: repo.language || data.language || null,
-            last_synced: firebase.firestore.FieldValue.serverTimestamp()
-          };
+      try {
+        const githubStars = await fetchAllStarredRepos('MarceloDe', ghToken);
+        logLine('sync-log', `Fetched ${githubStars.length} stars from GitHub. Comparing with Firestore...`, 'info');
 
-          await db.collection('starred_repos').doc(repo.id).update(updates);
-          Object.assign(repo, updates);
+        const existingMap = new Map(REPOS.map(r => [r.full_name, r]));
+        let updatedCount = 0, addedCount = 0, failedCount = 0;
 
-          updatedCount++;
-          if (i % 5 === 0) logLine('sync-log', `Updated ${updatedCount} repos…`, 'ok');
-        } catch (e) {
-          failedCount++;
-          logLine('sync-log', `⚠ ${repo.full_name}: ${e.message}`, 'warn');
+        for (let i = 0; i < githubStars.length; i++) {
+          const s = githubStars[i];
+          prog.style.width = `${Math.round((i / githubStars.length) * 100)}%`;
+
+          try {
+            const docId = s.full_name.replace('/', '__');
+            const existing = existingMap.get(s.full_name);
+
+            const data = {
+              full_name: s.full_name,
+              stars: s.stargazers_count,
+              html_url: s.html_url,
+              language: s.language || null,
+              last_synced: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (existing) {
+              // Update existing
+              await db.collection('starred_repos').doc(docId).update(data);
+              Object.assign(existing, data);
+              updatedCount++;
+            } else {
+              // Add new
+              const newRepoData = {
+                ...data,
+                categories: autoClassify(s),
+                tldr: s.description || '',
+                fitness: 3,
+                innovation_idea: '',
+                added_at: firebase.firestore.FieldValue.serverTimestamp(),
+                is_new: true
+              };
+              await db.collection('starred_repos').doc(docId).set(newRepoData);
+              REPOS.unshift({ id: docId, ...newRepoData });
+              addedCount++;
+            }
+          } catch (e) {
+            failedCount++;
+            logLine('sync-log', `⚠ ${s.full_name}: ${e.message}`, 'warn');
+          }
         }
-        if (i % 10 === 9 && !ghToken) await delay(1200); // rate limit pause
+
+        prog.style.width = '100%';
+        logLine('sync-log', `✓ Sync complete: ${addedCount} added, ${updatedCount} updated, ${failedCount} failed`, 'ok');
+        showToast(`✓ Sync complete: ${addedCount} added, ${updatedCount} updated`, 'ok');
+        initSideBar();
+        render();
+        updateCounts();
+      } catch (e) {
+        logLine('sync-log', `Critical Sync Error: ${e.message}`, 'err');
       }
-      prog.style.width = '100%';
-      logLine('sync-log', `✓ Sync complete — ${updatedCount} updated, ${failedCount} failed`, 'ok');
-      showToast(`✓ Synced ${updatedCount} repos`, 'ok');
-      render();
-      updateCounts();
     }
 
     function syncSingle() {
@@ -2225,9 +2240,20 @@
       try {
         logLine('sync-log', `Fetching ${fullName}…`, 'info');
         const data = await fetchGitHubRepo(fullName);
+        const docId = data.full_name.replace('/', '__');
+
+        const updates = {
+          stars: data.stargazers_count,
+          language: data.language || null,
+          last_synced: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        // Update Firestore
+        await db.collection('starred_repos').doc(docId).set(updates, { merge: true });
+
         const idx = REPOS.findIndex(r => r.full_name === fullName);
         if (idx >= 0) {
-          REPOS[idx].stars = data.stargazers_count;
+          Object.assign(REPOS[idx], updates);
           logLine('sync-log', `✓ Updated ${fullName}: ${data.stargazers_count} stars`, 'ok');
           showToast(`★ ${data.stargazers_count}`, 'ok');
           render();
@@ -2243,10 +2269,17 @@
       let done = 0;
       const delay = ms => new Promise(r => setTimeout(r, ms));
       for (let i = 0; i < REPOS.length; i++) {
+        const repo = REPOS[i];
         try {
-          const data = await fetchGitHubRepo(REPOS[i].full_name);
-          REPOS[i].language = data.language || REPOS[i].language;
-          REPOS[i].tldr = data.description || REPOS[i].tldr;
+          const data = await fetchGitHubRepo(repo.full_name);
+          const updates = {
+            language: data.language || repo.language,
+            tldr: data.description || repo.tldr,
+            last_synced: firebase.firestore.FieldValue.serverTimestamp()
+          };
+
+          await db.collection('starred_repos').doc(repo.id).update(updates);
+          Object.assign(repo, updates);
           done++;
         } catch (e) { }
         if (i % 10 === 9 && !ghToken) await delay(1200);
@@ -2263,25 +2296,44 @@
       if (!fullName.includes('/')) { showToast('Use owner/repo format', 'err'); return; }
       if (REPOS.find(r => r.full_name === fullName)) { showToast('Repo already in database', 'warn'); return; }
       try {
-        logLine('add-log', `Fetching ${fullName}…`, 'info');
+        logLine('add-log', `Fetching ${fullName} from GitHub…`, 'info');
         const data = await fetchGitHubRepo(fullName);
+        const docId = data.full_name.replace('/', '__');
+
         const newRepo = {
           full_name: data.full_name,
-          categories: [],
+          categories: autoClassify(data),
           tldr: data.description || '',
           fitness: 3,
           innovation_idea: '',
           html_url: data.html_url,
           stars: data.stargazers_count,
-          language: data.language
+          language: data.language || null,
+          added_at: firebase.firestore.FieldValue.serverTimestamp(),
+          last_synced: firebase.firestore.FieldValue.serverTimestamp(),
+          is_new: true
         };
-        REPOS.push(newRepo);
-        logLine('add-log', `✓ Added ${data.full_name} (★${data.stargazers_count})`, 'ok');
+
+        // Save to Firestore
+        await db.collection('starred_repos').doc(docId).set(newRepo);
+        REPOS.unshift({ id: docId, ...newRepo });
+
+        // Optional: Star on GitHub if token present
+        if (ghToken) {
+          logLine('add-log', `Starring ${fullName} on your GitHub account…`, 'info');
+          await starOnGitHub(fullName);
+        }
+
+        logLine('add-log', `✓ Added and synced ${data.full_name}`, 'ok');
         showToast(`Added ${data.full_name}`, 'ok');
-        document.getElementById('total-count').textContent = REPOS.length;
+        updateCounts();
+        initSideBar();
         render();
         document.getElementById('add-repo-input').value = '';
-      } catch (e) { logLine('add-log', `✗ ${e.message}`, 'err'); }
+      } catch (e) {
+        logLine('add-log', `✗ Error: ${e.message}`, 'err');
+        showToast(`Error adding: ${e.message}`, 'err');
+      }
     }
 
     function bulkImport() {
