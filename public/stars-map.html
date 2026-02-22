@@ -1318,9 +1318,9 @@
     }
   </style>
   <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth-compat.js"></script>
 </head>
 
 <body>
@@ -1731,6 +1731,9 @@
     const db = firebase.firestore();
     const auth = firebase.auth();
 
+    // Debugging Firestore connection
+    db.settings({ experimentalForceLongPolling: true });
+
     let REPOS = []; // Now populated from Firestore
 
     // ─────────────────────────────── CONSTANTS ───────────────────────────────────
@@ -1885,11 +1888,21 @@
 
     // ─────────────────────────────── FIREBASE OPERATIONS ──────────────────────────
     async function loadRepos() {
-      const snapshot = await db.collection('starred_repos').orderBy('fitness', 'desc').get();
-      REPOS = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      initSideBar();
-      render();
-      updateCounts();
+      try {
+        const snapshot = await db.collection('starred_repos').orderBy('fitness', 'desc').get();
+        REPOS = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        initSideBar();
+        render();
+        updateCounts();
+      } catch (e) {
+        console.error("Firestore Load Error:", e);
+        if (e.message.includes('database (default) does not exist')) {
+          logLine('sync-log', '❌ Firestore Error: Database (default) not found. Please ensure Firestore is initialized in Native Mode in the Firebase Console.', 'err');
+          openUpdatePanel('sync');
+        } else {
+          logLine('sync-log', `❌ Firestore Error: ${e.message}`, 'err');
+        }
+      }
     }
 
     async function updateRepoInFirestore(fullName, fields) {
