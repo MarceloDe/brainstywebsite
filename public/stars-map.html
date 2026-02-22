@@ -1734,6 +1734,11 @@
     // Debugging Firestore connection
     db.settings({ experimentalForceLongPolling: true });
 
+    // LOG PROJECT ID FOR VERIFICATION
+    setTimeout(() => {
+      logLine('sync-log', `🔍 Firebase Project: ${firebase.app().options.projectId}`, 'info');
+    }, 1000);
+
     let REPOS = []; // Now populated from Firestore
 
     // ─────────────────────────────── CONSTANTS ───────────────────────────────────
