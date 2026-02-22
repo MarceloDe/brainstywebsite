@@ -2217,16 +2217,54 @@
         const existingMap = new Map(REPOS.map(r => [r.full_name.toLowerCase(), r]));
         let updatedCount = 0, addedCount = 0, failedCount = 0;
 
+        // Preliminary populate REPOS locally so user sees them immediately
+        for (const s of githubStars) {
+          if (!existingMap.has(s.full_name.toLowerCase())) {
+            const tempRepo = {
+              id: s.full_name.replace('/', '__'),
+              full_name: s.full_name,
+              stars: s.stargazers_count,
+              html_url: s.html_url,
+              language: s.language || null,
+              categories: autoClassify(s),
+              tldr: s.description || '',
+              fitness: 3,
+              innovation_idea: '',
+              is_new: true,
+              last_synced: new Date()
+            };
+            REPOS.unshift(tempRepo);
+            existingMap.set(s.full_name.toLowerCase(), tempRepo);
+          } else {
+            const repo = existingMap.get(s.full_name.toLowerCase());
+            repo.stars = s.stargazers_count;
+            repo.language = s.language || repo.language;
+          }
+        }
+
+        // Render early
+        initSideBar();
+        render();
+        updateCounts();
+
+        async function withTimeout(promise, ms = 5000) {
+          const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Firestore Timeout')), ms));
+          return Promise.race([promise, timeout]);
+        }
+
         for (let i = 0; i < githubStars.length; i++) {
           const s = githubStars[i];
           prog.style.width = `${Math.round((i / githubStars.length) * 100)}%`;
-          if (i % 10 === 0) logLine('sync-log', `Processing ${i + 1}/${githubStars.length}...`, 'info');
+          if (i % 10 === 0) {
+            logLine('sync-log', `Persisting ${i + 1}/${githubStars.length}...`, 'info');
+            render(); // Refresh UI periodically
+          }
 
           try {
             const docId = s.full_name.replace('/', '__');
-            const existing = existingMap.get(s.full_name.toLowerCase());
+            const existingInDb = REPOS.find(r => r.id === docId);
 
-            const data = {
+            const dbData = {
               full_name: s.full_name,
               stars: s.stargazers_count,
               html_url: s.html_url,
@@ -2234,15 +2272,12 @@
               last_synced: firebase.firestore.FieldValue.serverTimestamp()
             };
 
-            if (existing) {
-              // Update existing
-              await db.collection('starred_repos').doc(docId).update(data);
-              Object.assign(existing, data);
+            if (existingInDb && !existingInDb.is_new) {
+              await withTimeout(db.collection('starred_repos').doc(docId).update(dbData));
               updatedCount++;
             } else {
-              // Add new
               const newRepoData = {
-                ...data,
+                ...dbData,
                 categories: autoClassify(s),
                 tldr: s.description || '',
                 fitness: 3,
@@ -2250,13 +2285,12 @@
                 added_at: firebase.firestore.FieldValue.serverTimestamp(),
                 is_new: true
               };
-              await db.collection('starred_repos').doc(docId).set(newRepoData);
-              REPOS.unshift({ id: docId, ...newRepoData });
+              await withTimeout(db.collection('starred_repos').doc(docId).set(newRepoData, { merge: true }));
               addedCount++;
             }
           } catch (e) {
             failedCount++;
-            logLine('sync-log', `⚠ ${s.full_name}: ${e.message}`, 'warn');
+            if (i < 5) logLine('sync-log', `⚠ Firestore Persistence Issue: ${e.message}`, 'warn');
           }
         }
 
