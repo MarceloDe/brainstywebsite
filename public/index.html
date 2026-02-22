@@ -1915,21 +1915,36 @@
     }
 
     // ─────────────────────────────── GITHUB SYNC ─────────────────────────────────
-    async function fetchAllStarredRepos(username, token) {
+    async function fetchAllStarredRepos(token) {
       let allStars = [];
       let page = 1;
       const perPage = 100;
 
+      // Use /user/starred (authenticated) which is more accurate/real-time
+      const baseUrl = token ? 'https://api.github.com/user/starred' : 'https://api.github.com/users/MarceloDe/starred';
+
       while (true) {
         logLine('sync-log', `Fetching page ${page} of starred repos...`, 'info');
-        const res = await fetch(`https://api.github.com/users/${username}/starred?per_page=${perPage}&page=${page}`, {
-          headers: token ? { 'Authorization': `token ${token}` } : {}
+        const res = await fetch(`${baseUrl}?per_page=${perPage}&page=${page}`, {
+          headers: {
+            'Accept': 'application/vnd.github+json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+            'X-GitHub-Api-Version': '2022-11-28'
+          }
         });
 
-        if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(`GitHub API ${res.status}: ${errData.message || res.statusText}`);
+        }
+
         const data = await res.json();
+        if (!Array.isArray(data)) break;
+
         allStars = allStars.concat(data);
-        if (data.length < perPage || page >= 10) break; // Limit to 10 pages as per requirement
+        logLine('sync-log', `Received ${data.length} repos. Total so far: ${allStars.length}`, 'info');
+
+        if (data.length < perPage || page >= 10) break;
         page++;
       }
       return allStars;
@@ -2153,7 +2168,12 @@
       try {
         const res = await fetch(`https://api.github.com/user/starred/${fullName}`, {
           method: 'PUT',
-          headers: { 'Authorization': `token ${ghToken}`, 'Content-Length': '0' }
+          headers: {
+            'Authorization': `Bearer ${ghToken}`,
+            'Content-Length': '0',
+            'Accept': 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28'
+          }
         });
         return res.ok;
       } catch (e) { return false; }
@@ -2166,22 +2186,27 @@
       const progWrap = document.getElementById('sync-progress-wrap');
       const prog = document.getElementById('sync-progress');
       progWrap.style.display = 'block';
-      logLine('sync-log', `Starting full sync from GitHub...`, 'info');
+      logLine('sync-log', `Starting Full Galaxy Sync...`, 'info');
 
       try {
-        const githubStars = await fetchAllStarredRepos('MarceloDe', ghToken);
-        logLine('sync-log', `Fetched ${githubStars.length} stars from GitHub. Comparing with Firestore...`, 'info');
+        // If ghToken is present, fetch stars for the authenticated user.
+        // Otherwise, if 'MarceloDe' is hardcoded, it implies fetching public stars.
+        // Assuming fetchAllStarredRepos now takes only ghToken if it's for the authenticated user.
+        const githubStars = await fetchAllStarredRepos(ghToken);
+        logLine('sync-log', `Found ${githubStars.length} stars on GitHub. Syncing with database...`, 'ok');
 
-        const existingMap = new Map(REPOS.map(r => [r.full_name, r]));
+        // Use a lowercase map to avoid case-sensitivity issues with repo names
+        const existingMap = new Map(REPOS.map(r => [r.full_name.toLowerCase(), r]));
         let updatedCount = 0, addedCount = 0, failedCount = 0;
 
         for (let i = 0; i < githubStars.length; i++) {
           const s = githubStars[i];
           prog.style.width = `${Math.round((i / githubStars.length) * 100)}%`;
+          if (i % 10 === 0) logLine('sync-log', `Processing ${i + 1}/${githubStars.length}...`, 'info');
 
           try {
             const docId = s.full_name.replace('/', '__');
-            const existing = existingMap.get(s.full_name);
+            const existing = existingMap.get(s.full_name.toLowerCase());
 
             const data = {
               full_name: s.full_name,
