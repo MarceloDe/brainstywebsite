@@ -1428,7 +1428,16 @@
       <!-- TAB: SYNC -->
       <div id="tab-sync" class="panel-section" style="margin-bottom:0">
         <div class="panel-section">
-          <h3>🔄 Re-sync Stars from GitHub API</h3>
+          <h3>🌟 Discover New Stars</h3>
+          <p>Scan your GitHub starred history for repositories that aren't in Brainsty yet. Adds them automatically with
+            a default 3★ fitness.</p>
+          <button class="action-btn purple" onclick="syncNewStarredRepos()">✨ Discover & Add New Stars</button>
+          <div class="status-log" id="sync-new-log" style="min-height:40px;margin-top:8px">Ready to find new stars…
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3>🔄 Re-sync Existing Metadata</h3>
           <p>Fetches live star counts for all 101 repos using GitHub's public API. No auth token required — uses
             unauthenticated requests (60/hr limit). Batches automatically.</p>
           <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
@@ -1764,7 +1773,7 @@
     let currentConnector = 'clipboard';
     let currentImportRepo = null;
     let currentModalRepo = null;
-    let ghToken = sessionStorage.getItem('gh_token') || '';
+    let ghToken = localStorage.getItem('brainsty_gh_token') || '';
 
     // ─────────────────────────────── TOAST ───────────────────────────────────────
     function showToast(msg, type = 'ok') {
@@ -1893,7 +1902,7 @@
       const perPage = 100;
 
       while (true) {
-        statusLine('sync-log', `Fetching page ${page} of starred repos...`, 'info');
+        logLine('sync-log', `Fetching page ${page} of starred repos...`, 'info');
         const res = await fetch(`https://api.github.com/users/${username}/starred?per_page=${perPage}&page=${page}`, {
           headers: token ? { 'Authorization': `token ${token}` } : {}
         });
@@ -1920,7 +1929,7 @@
           return;
         }
 
-        statusLine('sync-log', `Found ${newRepos.length} new repos! Adding to Firestore...`, 'ok');
+        logLine('sync-new-log', `Found ${newRepos.length} new repos! Adding to Firestore...`, 'ok');
 
         for (const s of newRepos) {
           const docId = s.full_name.replace('/', '__');
@@ -1941,10 +1950,12 @@
           REPOS.unshift({ id: docId, ...data });
         }
 
+        initSideBar();
         render();
         updateCounts();
         showToast(`✓ ${newRepos.length} new repos added`, 'ok');
       } catch (e) {
+        logLine('sync-new-log', `Sync failed: ${e.message}`, 'err');
         showToast(`Sync failed: ${e.message}`, 'err');
       }
     }
@@ -2169,29 +2180,37 @@
       const prog = document.getElementById('sync-progress');
       progWrap.style.display = 'block';
       logLine('sync-log', `Starting sync for ${REPOS.length} repos…`, 'info');
-      let updated = 0, failed = 0;
+      let updatedCount = 0, failedCount = 0;
       const delay = ms => new Promise(r => setTimeout(r, ms));
+
       for (let i = 0; i < REPOS.length; i++) {
         const repo = REPOS[i];
         prog.style.width = `${Math.round((i / REPOS.length) * 100)}%`;
         try {
           const data = await fetchGitHubRepo(repo.full_name);
-          repo.stars = data.stargazers_count;
-          repo.tldr = repo.tldr || data.description || '';
-          repo.language = repo.language || data.language || null;
-          updated++;
-          if (i % 5 === 0) logLine('sync-log', `Updated ${updated} repos…`, 'ok');
+          const updates = {
+            stars: data.stargazers_count,
+            tldr: repo.tldr || data.description || '',
+            language: repo.language || data.language || null,
+            last_synced: firebase.firestore.FieldValue.serverTimestamp()
+          };
+
+          await db.collection('starred_repos').doc(repo.id).update(updates);
+          Object.assign(repo, updates);
+
+          updatedCount++;
+          if (i % 5 === 0) logLine('sync-log', `Updated ${updatedCount} repos…`, 'ok');
         } catch (e) {
-          failed++;
+          failedCount++;
           logLine('sync-log', `⚠ ${repo.full_name}: ${e.message}`, 'warn');
         }
         if (i % 10 === 9 && !ghToken) await delay(1200); // rate limit pause
       }
       prog.style.width = '100%';
-      logLine('sync-log', `✓ Sync complete — ${updated} updated, ${failed} failed`, 'ok');
-      showToast(`✓ Synced ${updated} repos`, 'ok');
+      logLine('sync-log', `✓ Sync complete — ${updatedCount} updated, ${failedCount} failed`, 'ok');
+      showToast(`✓ Synced ${updatedCount} repos`, 'ok');
       render();
-      document.getElementById('total-count').textContent = REPOS.length;
+      updateCounts();
     }
 
     function syncSingle() {
