@@ -1328,7 +1328,7 @@
   <div class="toast" id="toast"></div>
 
   <!-- HEADER -->
-  <header>
+  <header id="internal-header" style="display: none;">
     <div class="logo">BRAINSTY <span>//</span> Stars Map <span
         style="font-size:9px;background:#10b98120;border:1px solid #10b98140;color:#10b981;padding:2px 6px;border-radius:3px;margin-left:6px">v2</span>
       <span id="token-indicator" title="GitHub Token Status"></span>
@@ -1350,6 +1350,20 @@
       <button class="hdr-btn" onclick="openUpdatePanel('connectors')">⚡ Connectors</button>
     </div>
   </header>
+
+  <div class="toolbar-inline"
+    style="display: flex; gap: 12px; align-items: center; padding: 10px 20px; border-bottom: 1px solid var(--border); background: var(--surface);">
+    <div class="search-wrap" style="flex: 1;">
+      <span class="search-icon">⌕</span>
+      <input id="search-inline" type="text" placeholder="search repos, ideas, categories…"
+        oninput="document.getElementById('search').value = this.value; filterEditList(); render();"
+        style="width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px 6px 30px; color: var(--text); font-family: 'Space Mono', monospace; font-size: 12px; outline: none;">
+    </div>
+    <div class="header-actions">
+      <button class="hdr-btn success" onclick="openUpdatePanel('sync')">⟳ Sync</button>
+      <button class="hdr-btn primary" onclick="openUpdatePanel('add')">＋ Add</button>
+    </div>
+  </div>
 
   <div class="container">
     <!-- SIDEBAR -->

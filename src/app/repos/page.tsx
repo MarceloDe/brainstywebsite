@@ -25,7 +25,7 @@ export default function ReposPage() {
     return (
         <div className="h-[calc(100vh-64px)] w-full overflow-hidden bg-background">
             <iframe
-                src="/stars-map.html"
+                src="/stars.html"
                 className="h-full w-full border-none"
                 title="GitHub Stars Intelligence Map"
             />
