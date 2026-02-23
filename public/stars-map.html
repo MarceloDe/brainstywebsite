@@ -2247,10 +2247,15 @@
         render();
         updateCounts();
 
-        async function withTimeout(promise, ms = 5000) {
-          const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Firestore Timeout')), ms));
-          return Promise.race([promise, timeout]);
+        // Check Auth Status
+        const currentUser = firebase.auth().currentUser;
+        if (!currentUser) {
+          logLine('sync-log', '⚠ Warning: Not logged into Firebase. Cloud persistence may fail.', 'warn');
+        } else {
+          logLine('sync-log', `👤 Authenticated as: ${currentUser.email || currentUser.uid}`, 'ok');
         }
+
+        const sleep = ms => new Promise(res => setTimeout(res, ms));
 
         for (let i = 0; i < githubStars.length; i++) {
           const s = githubStars[i];
@@ -2259,6 +2264,8 @@
             logLine('sync-log', `Persisting ${i + 1}/${githubStars.length}...`, 'info');
             render(); // Refresh UI periodically
           }
+
+          await sleep(50);
 
           try {
             const docId = s.full_name.replace('/', '__');
@@ -2273,7 +2280,7 @@
             };
 
             if (existingInDb && !existingInDb.is_new) {
-              await withTimeout(db.collection('starred_repos').doc(docId).update(dbData));
+              await db.collection('starred_repos').doc(docId).update(dbData);
               updatedCount++;
             } else {
               const newRepoData = {
@@ -2285,12 +2292,12 @@
                 added_at: firebase.firestore.FieldValue.serverTimestamp(),
                 is_new: true
               };
-              await withTimeout(db.collection('starred_repos').doc(docId).set(newRepoData, { merge: true }));
+              await db.collection('starred_repos').doc(docId).set(newRepoData, { merge: true });
               addedCount++;
             }
           } catch (e) {
             failedCount++;
-            if (i < 5) logLine('sync-log', `⚠ Firestore Persistence Issue: ${e.message}`, 'warn');
+            if (failedCount <= 10) logLine('sync-log', `⚠ ${s.full_name}: ${e.message}`, 'warn');
           }
         }
 
