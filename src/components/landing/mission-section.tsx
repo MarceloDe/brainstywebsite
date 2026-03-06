@@ -4,36 +4,35 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const pillars = [
   {
-    title: 'Translate',
+    title: 'Know Your Real Cost',
     description:
-      'We translate complex, evidence-based research into useful, understandable knowledge for the average person.',
+      "Don't pay for estimates. Brainsty queries 5 billion+ actual negotiated rates from hospital transparency data to show what procedures REALLY cost on your plan — and tells you when cash-pay is cheaper.",
     imageId: 'mission-translate',
   },
   {
-    title: 'Integrate',
+    title: 'Stop Surprise Bills',
     description:
-      'We integrate modern technology (like AI, wearables, and apps) to build sustainable and engaging health and wellness solutions.',
+      'Brainsty monitors every bill against your plan terms and actual negotiated rates. Unfair charges get flagged and disputes get built automatically — even before the bill reaches your mailbox.',
     imageId: 'mission-integrate',
   },
   {
-    title: 'Delivery',
+    title: 'Optimize Your Benefits',
     description:
-      'We deliver reliable, personalized knowledge that empowers users to make informed health decisions.',
+      'Your always-on agent inspects your plan, tracks your deductible progress, alerts you to benefit opportunities, and gives you data-backed talking points for employer benefit negotiations.',
     imageId: 'mission-delivery',
   },
 ];
 
 export default function MissionSection() {
   return (
-    <section className="py-20 md:py-28">
+    <section id="how-it-works" className="py-20 md:py-28">
       <div className="container">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold font-headline">
-            Our Mission, Your Empowerment
+          <h2 className="text-3xl md:text-5xl font-bold font-headline">
+            How It Works
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            We are founded on three core principles to guide you through the
-            complexities of healthcare.
+            Empowering you with the intelligence needed to navigate the healthcare financial system.
           </p>
         </div>
 

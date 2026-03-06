@@ -18,11 +18,11 @@ import {
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/features", label: "Features" },
-  { href: "/research", label: "Curated Research" },
-  { href: "/concierge", label: "AI Concierge" },
-  { href: "/workerbrainsty", label: "WorkerBrainsty" },
-  { href: "/repos", label: "Repos" },
+  { href: "/#how-it-works", label: "How It Works" },
+  { href: "/#your-shield", label: "Your Shield" },
+  { href: "/#why-brainsty", label: "Why Brainsty" },
+  { href: "/#for-employers", label: "For Employers" },
+  { href: "/#early-access", label: "Early Access" },
 ];
 
 export default function Header() {

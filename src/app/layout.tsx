@@ -7,8 +7,14 @@ import Footer from "@/components/shared/footer";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Brainsty Health Navigator",
-  description: "Human-inspired biotech to support you in your health journey.",
+  title: "Brainsty — AI Healthcare Concierge | Know Your Real Costs",
+  description: "AI-powered healthcare concierge. Know your real costs. Prevent surprise bills. Optimize your benefits. Independent — no insurer or provider ties.",
+  openGraph: {
+    title: "Brainsty — Your Healthcare Intelligence",
+    description: "Stop guessing about healthcare costs. Brainsty is an AI concierge that works for you.",
+    type: "website",
+    url: "https://brainsty.ai",
+  },
 };
 
 export default function RootLayout({

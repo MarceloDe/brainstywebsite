@@ -1,0 +1,520 @@
+---
+type: website-guide
+tags: [brainsty, website, transformation, content, guide]
+date: 2026-03-05
+scope: public-pages-only (DO NOT change /concierge or /research logged-in areas)
+platform: Next.js (React) hosted at brainsty.ai
+---
+
+# Brainsty.ai Website Transformation Guide
+## Step-by-Step Instructions for LLM Website Builder
+
+**Purpose:** Transform the public landing page of brainsty.ai from a generic mission statement into a compelling healthcare AI concierge product page that communicates specific value propositions, real user pain points, and market positioning.
+
+**Scope:** PUBLIC pages ONLY. Do NOT modify:
+- `/concierge` (authenticated chat interface)
+- `/research` (authenticated research section)
+- AuthProvider or any authentication logic
+- Any backend API endpoints
+
+**Platform:** Next.js (React), currently using Alegreya + Belleza fonts, blue-to-purple gradient scheme.
+
+---
+
+## MASTER FROM → TO TABLE
+
+| Element | CURRENT (FROM) | NEW (TO) |
+|---------|---------------|----------|
+| **Site Title** | "Brainsty Health Navigator" | "Brainsty — Your Healthcare Intelligence" |
+| **Meta Description** | "Human-inspired biotech to support you in your health journey." | "AI-powered healthcare concierge. Know your real costs. Prevent surprise bills. Optimize your benefits. Independent — no insurer or provider ties." |
+| **Navigation** | No visible nav tabs (just logo + auth) | Add 5 nav tabs: How It Works, Your Shield, Why Brainsty, For Employers, Early Access |
+| **Hero Heading** | "Our Mission, Your Empowerment" | "Your Healthcare Costs Shouldn't Be a Mystery" |
+| **Hero Subheading** | "We are founded on three core principles..." | "An AI concierge that works for YOU — not insurers, not providers. Know your real costs. Prevent surprise bills. Optimize your benefits." |
+| **Card 1 Title** | "Translate" | "Know Your Real Cost" |
+| **Card 1 Description** | "We translate complex, evidence-based research..." | "Don't pay for estimates. Brainsty queries 5 billion+ actual negotiated rates to show what procedures REALLY cost on your plan — and when cash-pay is cheaper." |
+| **Card 2 Title** | "Integrate" | "Stop Surprise Bills" |
+| **Card 2 Description** | "We integrate modern technology..." | "Brainsty monitors every bill against your plan terms and actual rates. Unfair charges get flagged. Disputes get built automatically — even before the bill reaches your mailbox." |
+| **Card 3 Title** | "Delivery" | "Optimize Your Benefits" |
+| **Card 3 Description** | "We deliver reliable, personalized knowledge..." | "Your always-on agent inspects your plan, tracks your deductible, alerts you to benefit opportunities, and provides data for employer benefit negotiations." |
+| **Card Images** | Generic Unsplash (doctor, smartwatch, laptop) | Healthcare-specific: cost comparison screen, shield/protection visual, benefits dashboard |
+| **Wefella Section Heading** | "Meet Wefella, Your AI Health Concierge" | "Meet Wefella — Your Always-On Healthcare Guardian" |
+| **Wefella Description** | "Get personalized guidance and support from an expert healthcare concierge..." | "Not just a chatbot. Wefella is a continuous AI guardian that prevents financial harm, navigates the system for you, and fights unfair bills — in English, Spanish, and Portuguese." |
+| **Wefella Feature 1** | "Navigate insurance and find providers" | "Prevent surprise bills and auto-build claims for unfair charges" |
+| **Wefella Feature 2** | "Understand medical notes and research" | "Find real prices — not estimates — for any procedure or medication" |
+| **Wefella Feature 3** | "Optimize medication and pharmacy choices" | "Optimize your plan, benefits, and pharmacy costs year-round" |
+| **Wefella CTA Button** | "Try the AI Concierge" | "Try Wefella Free" (keep linking to `/concierge`) |
+| **NEW SECTION** | (does not exist) | "Your Problems, Solved" — 6 scenario cards |
+| **NEW SECTION** | (does not exist) | "Why Brainsty Is Different" — 4 differentiators |
+| **NEW SECTION** | (does not exist) | "For Employers" — B2B value proposition |
+| **NEW SECTION** | (does not exist) | "The Numbers" — Market stats bar |
+| **NEW SECTION** | (does not exist) | "Early Access" — Waitlist email capture |
+| **Footer Text** | "Built by Brainsty. © 2026 All rights reserved." | Full 4-column footer with company, product, legal, contact |
+| **Footer Tagline** | "Human-inspired biotech to support you in your health journey." | "Independent. White-Label. No insurance or provider affiliations." |
+| **NEW PAGES** | /about → 404, /privacy → 404, /terms → 404 | Create /privacy and /terms pages |
+
+---
+
+## STEP-BY-STEP IMPLEMENTATION
+
+### STEP 1: Update Site Metadata
+
+**File to edit:** `app/layout.tsx` or equivalent Next.js layout file
+
+**Changes:**
+```
+FROM: <title>Brainsty Health Navigator</title>
+TO:   <title>Brainsty — AI Healthcare Concierge | Know Your Real Costs</title>
+
+FROM: <meta name="description" content="Human-inspired biotech to support you in your health journey." />
+TO:   <meta name="description" content="AI-powered healthcare concierge. Know your real costs. Prevent surprise bills. Optimize your benefits. Independent — no insurer or provider ties." />
+```
+
+**Add Open Graph tags:**
+```html
+<meta property="og:title" content="Brainsty — Your Healthcare Intelligence" />
+<meta property="og:description" content="Stop guessing about healthcare costs. Brainsty is an AI concierge that works for you." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://brainsty.ai" />
+```
+
+### STEP 2: Add Navigation Bar
+
+**Current:** No visible navigation tabs (just logo + auth provider)
+**New:** Add a sticky top navigation bar
+
+**Navigation items (anchor links for same-page scroll):**
+
+| Tab Label | Anchor Target | Order |
+|-----------|--------------|-------|
+| How It Works | `#how-it-works` | 1 |
+| Your Shield | `#your-shield` | 2 |
+| Why Brainsty | `#why-brainsty` | 3 |
+| For Employers | `#for-employers` | 4 |
+| Early Access | `#early-access` | 5 |
+
+**Implementation notes:**
+- Keep existing Brainsty logo on the left
+- Keep existing auth/login capability on the right
+- New nav tabs in the center
+- Sticky/fixed position on scroll
+- Mobile: hamburger menu
+- Keep the blue-to-purple gradient scheme
+
+### STEP 3: Transform Hero Section
+
+**Current component content:**
+```
+Heading: "Our Mission, Your Empowerment"
+Subheading: "We are founded on three core principles to guide you through the complexities of healthcare."
+```
+
+**Replace with:**
+```
+Heading: "Your Healthcare Costs Shouldn't Be a Mystery"
+
+Subheading: "Brainsty is an AI concierge that works for YOU — not insurers,
+not providers. Know your real costs before you pay. Prevent surprise bills
+before they arrive. Optimize your benefits before open enrollment ends."
+
+CTA Button: "Get Early Access" → scrolls to #early-access section
+
+Secondary text (small): "Independent. White-label. No ties to any insurer or provider."
+```
+
+**Design notes:**
+- Keep existing background style or use nature/landscape hero image
+- Keep white text on dark/gradient overlay
+- Add the CTA button (does not exist currently)
+- Keep fonts (Alegreya for headings, Belleza for body) or update to Montserrat for cleaner feel
+
+### STEP 4: Transform Three Principle Cards → "How It Works" Section
+
+**Add section ID:** `id="how-it-works"`
+
+**Card 1:**
+```
+FROM Title: "Translate"
+FROM Desc: "We translate complex, evidence-based research into useful, understandable knowledge for the average person."
+FROM Image: Unsplash doctor-patient
+
+TO Title: "Know Your Real Cost"
+TO Desc: "Don't pay for estimates. Brainsty queries 5 billion+ actual negotiated rates from hospital transparency data to show what procedures REALLY cost on your plan — and tells you when cash-pay is cheaper."
+TO Image: Cost comparison illustration or dashboard screenshot
+TO Icon suggestion: Dollar sign + magnifying glass
+```
+
+**Card 2:**
+```
+FROM Title: "Integrate"
+FROM Desc: "We integrate modern technology (like AI, wearables, and apps) to build sustainable and engaging health and wellness solutions."
+FROM Image: Unsplash smartwatch
+
+TO Title: "Stop Surprise Bills"
+TO Desc: "Brainsty monitors every bill against your plan terms and actual negotiated rates. Unfair charges get flagged and disputes get built automatically — even before the bill reaches your mailbox."
+TO Image: Shield/protection visual or bill-scanning illustration
+TO Icon suggestion: Shield with checkmark
+```
+
+**Card 3:**
+```
+FROM Title: "Delivery"
+FROM Desc: "We deliver reliable, personalized knowledge that empowers users to make informed health decisions."
+FROM Image: Unsplash person with laptop
+
+TO Title: "Optimize Your Benefits"
+TO Desc: "Your always-on agent inspects your plan, tracks your deductible progress, alerts you to benefit opportunities, and gives you data-backed talking points for employer benefit negotiations."
+TO Image: Dashboard/benefits optimization visual
+TO Icon suggestion: Chart trending up
+```
+
+**Keep:** Card hover effect (image scale transformation), 3-card grid layout, responsive stacking on mobile.
+
+### STEP 5: Transform Wefella AI Concierge Section
+
+**Current:**
+```
+Heading: "Meet Wefella, Your AI Health Concierge"
+Description: "Get personalized guidance and support from an expert healthcare concierge. Wefella is designed to help you understand your health better and make informed decisions with confidence."
+Features:
+  - Navigate insurance and find providers
+  - Understand medical notes and research
+  - Optimize medication and pharmacy choices
+Button: "Try the AI Concierge" → /concierge
+```
+
+**Replace with:**
+```
+Heading: "Meet Wefella — Your Always-On Healthcare Guardian"
+
+Description: "Not just a chatbot you visit when you have a question. Wefella is a continuous AI guardian that prevents financial harm before it happens, navigates the healthcare system for you, and fights unfair bills — in English, Spanish, and Portuguese."
+
+Features (keep arrow icon format):
+  - Prevent surprise bills and auto-build claims for every unfair charge
+  - Find real negotiated prices — not estimates — for any procedure or medication
+  - Optimize your plan, employer benefits, and pharmacy costs year-round
+  - Decide whether to use your plan or pay cash for medication and surgery
+  - Get decomplicated scheduling at the best-value provider
+  - Auto-escalate denied claims with appeals, parity citations, and regulator complaints
+
+Button: "Try Wefella Free" → /concierge (keep same destination)
+```
+
+**Keep:** Link to `/concierge`, AuthProvider behavior, existing button styling.
+
+### STEP 6: ADD NEW SECTION — "Your Problems, Solved" (#your-shield)
+
+**This section does not exist currently. Add it AFTER the Wefella section.**
+
+**Section ID:** `id="your-shield"`
+**Section Title:** "Real Problems. Real Solutions."
+
+**Create 6 vertical scrolling cards:**
+
+**Card 1:**
+```
+Tag: COST TRANSPARENCY
+Title: "My MRI estimate was $3,800. The cash price? $399."
+Body: "Insurance pricing is broken. Brainsty finds your REAL cost — comparing actual negotiated rates, cash-pay alternatives, and your deductible status. Decisions based on facts, not guesses."
+```
+
+**Card 2:**
+```
+Tag: SURPRISE BILL DEFENSE
+Title: "I had a heart attack out of state. The hospital billed me $78,000."
+Body: "Cross-state emergencies shouldn't bankrupt you. Brainsty knows the rules — Medicaid emergency coverage, single-case agreements, charity care — and generates dispute letters and phone scripts for you."
+```
+
+**Card 3:**
+```
+Tag: GHOST NETWORK FIGHTER
+Title: "Every therapist on my plan's list doesn't answer or isn't taking patients."
+Body: "Ghost networks are real. Brainsty documents your failed attempts, files gap exceptions for out-of-network care at in-network prices, and invokes mental health parity protections — automatically."
+```
+
+**Card 4:**
+```
+Tag: PLAN OPTIMIZER
+Title: "I'm choosing between 3 health plans and have no idea which is better."
+Body: "Stop guessing. Brainsty analyzes your actual medical usage, prescriptions, and provider preferences to simulate costs under each plan. You choose with data, not hope."
+```
+
+**Card 5:**
+```
+Tag: DENIAL FIGHTER
+Title: "My insurance denied the treatment my doctor recommended."
+Body: "Brainsty generates medical necessity appeals with clinical evidence, identifies manufacturer assistance programs, requests expedited review, and prepares external appeals to state regulators."
+```
+
+**Card 6:**
+```
+Tag: AUTO-CLAIMS BUILDER
+Title: "I got a bill for services I thought were covered."
+Body: "Brainsty compares every bill against your plan terms and actual negotiated rates. When something doesn't match, it flags the error and builds your claim — even before the bill reaches your mailbox."
+```
+
+**Design notes:**
+- Vertical scrolling cards, each taking ~60-70% of viewport height
+- Alternating light/dark card backgrounds
+- Tag/label as a colored chip in top-left of each card
+- Quote-style large title (like a real person saying it)
+- Keep the blue-to-purple color system
+- Mobile: full-width stacked cards
+
+### STEP 7: ADD NEW SECTION — "Why Brainsty Is Different" (#why-brainsty)
+
+**This section does not exist. Add after "Your Problems, Solved".**
+
+**Section ID:** `id="why-brainsty"`
+**Section Title:** "Why Brainsty Is Different"
+
+**4 differentiator blocks (2x2 grid desktop, stack on mobile):**
+
+**Block 1:**
+```
+Icon: Shield
+Title: "100% Independent — White Label"
+Body: "Brainsty has zero association with insurers, providers, or health services companies. We work for you. Period. No hidden incentives. No sponsored recommendations."
+```
+
+**Block 2:**
+```
+Icon: Eye/Radar
+Title: "Always On, Always Watching"
+Body: "Not a chatbot you visit. A continuous guardian — monitoring your plan, tracking regulatory changes, flagging billing errors, and optimizing your benefits 24/7."
+```
+
+**Block 3:**
+```
+Icon: Database/Chart
+Title: "Real Data, Not Estimates"
+Body: "Powered by 5 billion+ actual negotiated rates from hospital transparency data, government databases, and regulatory filings. You see what things REALLY cost."
+```
+
+**Block 4:**
+```
+Icon: Globe/Languages
+Title: "Speaks Your Language"
+Body: "Available in English, Spanish, and Portuguese. Because healthcare confusion shouldn't have a language barrier."
+```
+
+### STEP 8: ADD NEW SECTION — "For Employers" (#for-employers)
+
+**This section does not exist. Add after "Why Brainsty."**
+
+**Section ID:** `id="for-employers"`
+**Section Title:** "For Employers & Benefits Teams"
+
+```
+Headline: "Give Your Team a Healthcare Advantage"
+
+Body: "Brainsty integrates as a white-label solution for your organization. Reduce benefits administration burden, improve employee satisfaction, and lower claims costs — all while empowering your team with real healthcare intelligence."
+
+Feature bullets:
+  - White-label branding — your logo, your colors, your people
+  - Per-employee-per-month pricing — predictable, scalable
+  - Benefits consultant partnership program
+  - HIPAA-compliant architecture
+  - Multilingual support (English, Spanish, Portuguese)
+
+CTA Button: "Request Employer Demo" → mailto:hello@brainsty.ai or a contact form
+```
+
+**Design:** Darker background to differentiate from consumer sections. Professional, enterprise feel.
+
+### STEP 9: ADD NEW SECTION — Market Stats Bar
+
+**Add a horizontal stats section between "Why Brainsty" and "For Employers" (or after hero).**
+
+```
+STAT 1: "40%" — "of insured Americans can't understand their coverage"
+STAT 2: "5B+" — "actual negotiated rates now publicly available"
+STAT 3: "$78K" — "average surprise bill for out-of-state emergencies"
+STAT 4: "2027" — "deadline for insurers to provide real-time approvals"
+
+Source line (small): "Sources: KFF Health, CMS, Congressional Records 2025-2026"
+```
+
+**Design:** Horizontal bar, bold numbers, small descriptor text. Works as a visual break between sections.
+
+### STEP 10: ADD NEW SECTION — "Early Access" (#early-access)
+
+**This section does not exist. Add as the last section before footer.**
+
+**Section ID:** `id="early-access"`
+
+```
+Heading: "Join the Waitlist"
+Subheading: "Be First to Have a Healthcare Guardian"
+
+Body: "We're expanding Wefella AI concierge access. Join the waitlist to stop guessing about your healthcare costs."
+
+Form Fields:
+  - Email address (required, text input)
+  - Dropdown: "I am a..." → [Individual, Employer, Benefits Consultant, Other]
+
+Submit Button: "Get Early Access"
+
+Privacy note (small text): "We never share your information. No insurance company ties. No provider affiliations. Just healthcare intelligence for you."
+```
+
+**Design:** High-contrast section (dark background, bright CTA button — amber/gold #F59E0B against navy #0F172A).
+
+### STEP 11: Transform Footer
+
+**Current:**
+```
+- Brainsty SVG logo (gradient)
+- "Brainsty Health Navigator"
+- "Built by Brainsty. © 2026 All rights reserved."
+- "Human-inspired biotech to support you in your health journey."
+```
+
+**Replace with 4-column layout:**
+
+```
+COLUMN 1 — Company
+  Brainsty Healthcare LLC
+  Mission: Translate evidence-based research into useful knowledge.
+  Integrate technology for sustainable health engagement.
+  Deliver reliable knowledge for personalized health decisions.
+
+COLUMN 2 — Product
+  How It Works (#how-it-works)
+  Your Shield (#your-shield)
+  For Employers (#for-employers)
+  Early Access (#early-access)
+  Try Wefella (/concierge)
+
+COLUMN 3 — Legal
+  Privacy Policy (/privacy)
+  Terms of Service (/terms)
+
+COLUMN 4 — Contact
+  hello@brainsty.ai
+  United States
+
+BOTTOM BAR:
+  © 2026 Brainsty Healthcare LLC. All rights reserved.
+  Independent. White-Label. No insurance or provider affiliations.
+```
+
+**Keep:** Brainsty SVG logo, gradient styling.
+
+### STEP 12: Create New Pages
+
+**Create `/privacy` page:**
+- Title: "Privacy Policy"
+- Standard privacy policy content
+- Emphasize: HIPAA compliance intent, no data sharing with insurers/providers, user data ownership
+- Keep same layout/nav/footer as main page
+
+**Create `/terms` page:**
+- Title: "Terms of Service"
+- Standard terms content
+- Emphasize: independent status, information-only (not medical advice), user agreements
+
+---
+
+## COMPLETE FROM → TO SELECTOR/ELEMENT REFERENCE
+
+### Navigation Changes
+| FROM | TO |
+|------|-----|
+| (no nav tabs) | Tab: "How It Works" |
+| (no nav tabs) | Tab: "Your Shield" |
+| (no nav tabs) | Tab: "Why Brainsty" |
+| (no nav tabs) | Tab: "For Employers" |
+| (no nav tabs) | Tab: "Early Access" |
+
+### Button Label Changes
+| FROM | TO | Destination |
+|------|-----|-------------|
+| "Try the AI Concierge" | "Try Wefella Free" | `/concierge` (unchanged) |
+| (does not exist) | "Get Early Access" | `#early-access` |
+| (does not exist) | "Request Employer Demo" | `mailto:hello@brainsty.ai` |
+
+### Section Title Changes
+| FROM | TO |
+|------|-----|
+| "Our Mission, Your Empowerment" | "Your Healthcare Costs Shouldn't Be a Mystery" |
+| "Meet Wefella, Your AI Health Concierge" | "Meet Wefella — Your Always-On Healthcare Guardian" |
+| (does not exist) | "Real Problems. Real Solutions." |
+| (does not exist) | "Why Brainsty Is Different" |
+| (does not exist) | "For Employers & Benefits Teams" |
+| (does not exist) | "Join the Waitlist" |
+
+### Card Title Changes
+| FROM | TO |
+|------|-----|
+| "Translate" | "Know Your Real Cost" |
+| "Integrate" | "Stop Surprise Bills" |
+| "Delivery" | "Optimize Your Benefits" |
+
+### Feature List Changes (Wefella section)
+| FROM | TO |
+|------|-----|
+| "Navigate insurance and find providers" | "Prevent surprise bills and auto-build claims for every unfair charge" |
+| "Understand medical notes and research" | "Find real negotiated prices — not estimates — for any procedure or medication" |
+| "Optimize medication and pharmacy choices" | "Optimize your plan, employer benefits, and pharmacy costs year-round" |
+| (does not exist) | "Decide whether to use your plan or pay cash for medication and surgery" |
+| (does not exist) | "Get decomplicated scheduling at the best-value provider" |
+| (does not exist) | "Auto-escalate denied claims with appeals, parity citations, and regulator complaints" |
+
+### Footer Changes
+| FROM | TO |
+|------|-----|
+| "Brainsty Health Navigator" | "Brainsty Healthcare LLC" |
+| "Built by Brainsty. © 2026 All rights reserved." | "© 2026 Brainsty Healthcare LLC. All rights reserved." |
+| "Human-inspired biotech to support you in your health journey." | "Independent. White-Label. No insurance or provider affiliations." |
+| (no links) | Add: How It Works, Your Shield, For Employers, Early Access, Privacy, Terms, Contact |
+
+### Meta Changes
+| FROM | TO |
+|------|-----|
+| `<title>Brainsty Health Navigator</title>` | `<title>Brainsty — AI Healthcare Concierge \| Know Your Real Costs</title>` |
+| `<meta name="description" content="Human-inspired biotech...">` | `<meta name="description" content="AI-powered healthcare concierge. Know your real costs. Prevent surprise bills. Optimize your benefits. Independent — no insurer or provider ties.">` |
+
+---
+
+## SECTION ORDER (Top to Bottom)
+
+1. **Navigation Bar** (sticky) — Logo + 5 tabs + Auth
+2. **Hero** — "Your Healthcare Costs Shouldn't Be a Mystery" + CTA
+3. **How It Works** (#how-it-works) — 3 cards: Know Your Real Cost, Stop Surprise Bills, Optimize Your Benefits
+4. **Wefella AI Section** — "Meet Wefella — Your Always-On Healthcare Guardian" + 6 features + "Try Wefella Free" button
+5. **Your Problems, Solved** (#your-shield) — 6 scenario cards
+6. **Market Stats Bar** — 4 stats
+7. **Why Brainsty Is Different** (#why-brainsty) — 4 differentiator blocks
+8. **For Employers** (#for-employers) — B2B section + CTA
+9. **Early Access** (#early-access) — Waitlist signup form
+10. **Footer** — 4-column with links
+
+---
+
+## DO NOT CHANGE
+
+- `/concierge` page (authenticated AI chat interface)
+- `/research` page (authenticated research section)
+- AuthProvider component or any authentication logic
+- Any backend API endpoints
+- Any database connections or server-side logic
+- The existing SVG brain/shield logo (keep it)
+- The blue-to-purple gradient color system (keep it, extend it)
+
+---
+
+## COLOR PALETTE (extend existing)
+
+| Use | Color | Hex | Notes |
+|-----|-------|-----|-------|
+| Primary Blue | Existing | #4A90E2 | Keep |
+| Primary Purple | Existing | #9013FE | Keep |
+| CTA Accent | Amber/Gold | #F59E0B | NEW — for buttons |
+| Dark Background | Navy | #0F172A | NEW — for dark sections |
+| Light Background | Off-White | #F8FAFC | NEW — for alternating sections |
+| Success/Trust | Teal | #0D9488 | NEW — for shield/health icons |
+| Text Light | White | #FFFFFF | Keep |
+
+---
+
+*This guide maps every element of the current brainsty.ai public website to its new content. Hand this document directly to the LLM managing the website codebase. All content is derived from the Brainsty Obsidian vault: patient pain points research, market analysis, regulatory intelligence, user journey data, and business evaluation documents.*
