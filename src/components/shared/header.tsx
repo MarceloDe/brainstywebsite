@@ -38,11 +38,11 @@ export default function Header() {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 max-w-screen-2xl items-center">
+    <header className="sticky top-0 z-50 w-full border-b border-hairline bg-canvas">
+      <div className="container flex h-[64px] max-w-screen-2xl items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <BrainstyLogo className="h-8 w-8" />
-          <span className="text-xl font-bold font-headline bg-gradient-to-r from-brain-blue to-brain-purple bg-clip-text text-transparent sm:inline-block">
+          <BrainstyLogo className="h-8 w-8 text-ink" />
+          <span className="text-[20px] font-bold font-display text-ink sm:inline-block">
             Brainsty
           </span>
         </Link>
@@ -51,7 +51,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-medium text-foreground/60 transition-colors hover:text-foreground/80"
+              className="text-[14px] font-normal tracking-[0.3px] text-ink transition-colors hover:text-primary"
               onClick={closeMobileMenu}
             >
               {link.label}
@@ -93,17 +93,17 @@ export default function Header() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
+            <SheetContent side="right" className="bg-canvas">
               <Link href="/" className="mr-6 flex items-center space-x-2 mb-6" onClick={closeMobileMenu}>
-                <BrainstyLogo className="h-8 w-8" />
-                <span className="text-xl font-bold font-headline bg-gradient-to-r from-brain-blue to-brain-purple bg-clip-text text-transparent">Brainsty</span>
+                <BrainstyLogo className="h-8 w-8 text-ink" />
+                <span className="text-[20px] font-bold font-display text-ink">Brainsty</span>
               </Link>
               <div className="flex flex-col space-y-4">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="font-medium text-foreground/80"
+                    className="text-[14px] font-normal tracking-[0.3px] text-ink transition-colors hover:text-primary"
                     onClick={closeMobileMenu}
                   >
                     {link.label}

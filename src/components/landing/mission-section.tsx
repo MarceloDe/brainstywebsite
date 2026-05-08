@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const pillars = [
   {
@@ -25,13 +24,13 @@ const pillars = [
 
 export default function MissionSection() {
   return (
-    <section id="how-it-works" className="py-20 md:py-28">
+    <section id="how-it-works" className="py-[80px] bg-canvas">
       <div className="container">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold font-headline">
+          <h2 className="text-[48px] font-bold font-display text-ink leading-[1.1]">
             How It Works
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-[18px] font-light text-body leading-[1.55]">
             Empowering you with the intelligence needed to navigate the healthcare financial system.
           </p>
         </div>
@@ -42,32 +41,31 @@ export default function MissionSection() {
               (img) => img.id === pillar.imageId
             );
             return (
-              <Card
+              <div
                 key={pillar.title}
-                className="overflow-hidden flex flex-col group"
+                className="flex flex-col group bg-canvas"
               >
                 {image && (
-                  <div className="relative h-48 w-full overflow-hidden">
+                  <div className="relative h-[240px] w-full">
                     <Image
                       src={image.imageUrl}
                       alt={image.description}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                      className="object-cover"
                       data-ai-hint={image.imageHint}
                     />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
                   </div>
                 )}
-                <CardHeader>
-                  <CardTitle className="font-headline text-2xl">
+                <div className="p-[24px] flex flex-col flex-grow">
+                  <h3 className="font-display text-[18px] font-bold text-ink leading-[1.4]">
                     {pillar.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-muted-foreground">{pillar.description}</p>
-                </CardContent>
-              </Card>
+                  </h3>
+                  <p className="mt-4 text-[16px] font-light text-body leading-[1.55]">
+                    {pillar.description}
+                  </p>
+                </div>
+              </div>
             );
           })}
         </div>

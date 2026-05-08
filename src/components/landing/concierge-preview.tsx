@@ -2,22 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
 export default function ConciergePreview() {
     const diagramImage = PlaceHolderImages.find(img => img.id === "concierge-diagram");
 
     return (
-        <section className="py-20 md:py-28 bg-card">
+        <section className="py-[80px] bg-surface-card">
             <div className="container">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold font-headline">Meet Wefella — Your Always-On Healthcare Guardian</h2>
-                        <p className="mt-4 text-lg text-muted-foreground">
+                        <h2 className="text-[32px] md:text-[48px] font-bold font-display text-ink leading-[1.1]">Meet Wefella — Your Always-On Healthcare Guardian</h2>
+                        <p className="mt-6 text-[18px] font-light text-body leading-[1.55]">
                             Not just a chatbot you visit when you have a question. Wefella is a continuous AI guardian that prevents financial harm before it happens, navigates the healthcare system for you, and fights unfair bills — in English, Spanish, and Portuguese.
                         </p>
-                        <ul className="mt-6 space-y-3 text-muted-foreground">
+                        <ul className="mt-8 space-y-4 text-[16px] font-light text-body">
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
                                 <span>Prevent surprise bills and auto-build claims for every unfair charge</span>
@@ -40,30 +39,28 @@ export default function ConciergePreview() {
                             </li>
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
-                                <span className="font-medium text-foreground italic">Auto-escalate denied claims with appeals, parity citations, and regulator complaints</span>
+                                <span className="font-bold text-ink italic">Auto-escalate denied claims with appeals, parity citations, and regulator complaints</span>
                             </li>
                         </ul>
-                        <Button asChild size="lg" className="mt-8 bg-[#F59E0B] hover:bg-[#D97706] text-white border-none">
+                        <Button asChild size="default" variant="default" className="mt-10">
                             <Link href="/concierge">Try Wefella Free</Link>
                         </Button>
                     </div>
                     <div>
-                        <Card>
-                            <CardContent className="p-4">
-                                {diagramImage && (
-                                    <div className="aspect-video relative rounded-md overflow-hidden">
-                                        <Image
-                                            src={diagramImage.imageUrl}
-                                            alt={diagramImage.description}
-                                            fill
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                            className="object-cover"
-                                            data-ai-hint={diagramImage.imageHint}
-                                        />
-                                    </div>
-                                )}
-                            </CardContent>
-                        </Card>
+                        <div className="bg-canvas p-6">
+                            {diagramImage && (
+                                <div className="aspect-video relative rounded-none w-full">
+                                    <Image
+                                        src={diagramImage.imageUrl}
+                                        alt={diagramImage.description}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        className="object-cover"
+                                        data-ai-hint={diagramImage.imageHint}
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
