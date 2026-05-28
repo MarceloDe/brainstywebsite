@@ -12,7 +12,7 @@ import { BrainstyLogo } from '@/components/shared/icons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default function ResearchClient() {
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -20,7 +20,7 @@ export default function ResearchClient() {
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   const handleSearch = async () => {
-    if (!isLoggedIn) {
+    if (!user) {
       setShowAuthModal(true);
       return;
     }

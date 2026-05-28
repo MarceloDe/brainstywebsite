@@ -17,14 +17,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
-const navLinks = [
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#your-shield", label: "Your Shield" },
-  { href: "/#why-brainsty", label: "Why Brainsty" },
-  { href: "/#for-employers", label: "For Employers" },
-  { href: "/#early-access", label: "Early Access" },
-];
-
 export default function Header() {
   const { user, logout, isLoading } = useAuth();
   const router = useRouter();
@@ -37,6 +29,19 @@ export default function Header() {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
+  const activeLinks = user ? [
+    { href: "/concierge", label: "Wefella Chat" },
+    { href: "/research", label: "Curated Research" },
+    { href: "/repos", label: "Intelligence Map" },
+    { href: "/workerbrainsty", label: "Cognitive AI" },
+  ] : [
+    { href: "/#how-it-works", label: "How It Works" },
+    { href: "/#your-shield", label: "Your Shield" },
+    { href: "/#why-brainsty", label: "Why Brainsty" },
+    { href: "/#for-employers", label: "For Employers" },
+    { href: "/workerbrainsty", label: "Cognitive AI" },
+  ];
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-hairline bg-canvas">
       <div className="container flex h-[64px] max-w-screen-2xl items-center">
@@ -47,7 +52,7 @@ export default function Header() {
           </span>
         </Link>
         <nav className="hidden md:flex flex-1 items-center gap-6 text-sm">
-          {navLinks.map((link) => (
+          {activeLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -69,10 +74,25 @@ export default function Header() {
                   <span className="sr-only">Toggle user menu</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout}>Log out</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/concierge">Wefella Chat</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/research">Curated Research</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/repos">Intelligence Map</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/workerbrainsty">Cognitive AI</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
+                  Log out
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
@@ -99,7 +119,7 @@ export default function Header() {
                 <span className="text-[20px] font-bold font-display text-ink">Brainsty</span>
               </Link>
               <div className="flex flex-col space-y-4">
-                {navLinks.map((link) => (
+                {activeLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}

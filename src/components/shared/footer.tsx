@@ -1,4 +1,5 @@
 import { BrainstyLogo } from "@/components/shared/icons";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -23,11 +24,15 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold font-display text-[16px] text-ink">Product</h4>
             <ul className="space-y-2 text-[14px] font-light text-body">
-              <li><a href="#how-it-works" className="hover:text-primary transition-colors">How It Works</a></li>
-              <li><a href="#your-shield" className="hover:text-primary transition-colors">Your Shield</a></li>
-              <li><a href="#for-employers" className="hover:text-primary transition-colors">For Employers</a></li>
-              <li><a href="#early-access" className="hover:text-primary transition-colors">Early Access</a></li>
-              <li><a href="/concierge" className="hover:text-primary transition-colors">Try Wefella</a></li>
+              <li><Link href="/#how-it-works" className="hover:text-primary transition-colors">How It Works</Link></li>
+              <li><Link href="/#your-shield" className="hover:text-primary transition-colors">Your Shield</Link></li>
+              <li><Link href="/#for-employers" className="hover:text-primary transition-colors">For Employers</Link></li>
+              <li><Link href="/#early-access" className="hover:text-primary transition-colors">Early Access</Link></li>
+              <li><Link href="/concierge" className="hover:text-primary transition-colors">Wefella Chat</Link></li>
+              <li><Link href="/research" className="hover:text-primary transition-colors">Curated Research</Link></li>
+              <li><Link href="/repos" className="hover:text-primary transition-colors">Intelligence Map</Link></li>
+              <li><Link href="/workerbrainsty" className="hover:text-primary transition-colors">Cognitive AI</Link></li>
+              <li><Link href="/features" className="hover:text-primary transition-colors">Our Services</Link></li>
             </ul>
           </div>
 
