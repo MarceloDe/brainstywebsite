@@ -1,0 +1,28 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Magnifying glass revealing the real price">
+  <rect x="40" y="40" width="320" height="220" rx="20" fill="#f7f9fd"/>
+
+  <!-- simplified bar chart of cost -->
+  <g>
+    <rect x="92" y="170" width="34" height="50" rx="6" fill="#c9ddf7"/>
+    <rect x="140" y="140" width="34" height="80" rx="6" fill="#c9ddf7"/>
+    <rect x="188" y="112" width="34" height="108" rx="6" fill="#1c69d4"/>
+    <line x1="80" y1="222" x2="300" y2="222" stroke="#c9ddf7" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- clear price tag -->
+  <g transform="rotate(-8 250 110)">
+    <path d="M236 70 L302 70 L322 96 L286 142 L226 96 Z" fill="#ffffff" stroke="#1c69d4" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="250" cy="90" r="7" fill="#1c69d4"/>
+    <text x="270" y="118" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1c69d4">$</text>
+  </g>
+
+  <!-- magnifying glass -->
+  <g>
+    <circle cx="178" cy="158" r="62" fill="#1c69d4" opacity="0.10"/>
+    <circle cx="178" cy="158" r="62" fill="none" stroke="#1c69d4" stroke-width="10"/>
+    <circle cx="178" cy="158" r="50" fill="#ffffff" opacity="0.35"/>
+    <line x1="222" y1="202" x2="266" y2="246" stroke="#1c69d4" stroke-width="14" stroke-linecap="round"/>
+    <!-- truth check inside lens -->
+    <path d="M160 158 l12 13 l24 -28" stroke="#22c55e" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

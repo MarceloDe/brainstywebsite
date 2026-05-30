@@ -2,39 +2,39 @@
   "placeholderImages": [
     {
       "id": "hero",
-      "description": "A serene natural landscape with a calm body of water, reflecting hope and tranquility.",
-      "imageUrl": "https://images.unsplash.com/photo-1662189793032-ccb6135a9159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzZXJlbmUlMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzY3ODU0MDA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "serene landscape"
+      "description": "Friendly agent robot guarding a person from surprise medical bills",
+      "imageUrl": "/images/hero.svg",
+      "imageHint": "agent shield illustration"
     },
     {
       "id": "mission-translate",
-      "description": "A compassionate doctor explaining something to a patient on a tablet.",
-      "imageUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBwYXRpZW50JTIwdGFibGV0fGVufDB8fHx8MTc2NzkxMjAwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "doctor patient"
+      "description": "Magnifying glass revealing the real, clear cost of care",
+      "imageUrl": "/images/mission-translate.svg",
+      "imageHint": "price transparency illustration"
     },
     {
       "id": "mission-integrate",
-      "description": "Close-up on a smartwatch displaying health metrics with a blurred background of a person exercising.",
-      "imageUrl": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
-      "imageHint": "smartwatch health"
+      "description": "Shield blocking and deflecting a surprise bill",
+      "imageUrl": "/images/mission-integrate.svg",
+      "imageHint": "shield surprise bill illustration"
     },
     {
       "id": "mission-delivery",
-      "description": "A person smiling as they look at personalized health information on a laptop.",
-      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBsYXB0b3AlMjBoYXBweXxlbnwwfHx8fDE3Njc5MTIxMDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person laptop"
+      "description": "Performance gauge with upward arrow optimizing your benefits",
+      "imageUrl": "/images/mission-delivery.svg",
+      "imageHint": "benefits optimization gauge illustration"
     },
     {
       "id": "concierge-diagram",
-      "description": "Abstract diagram representing AI helping a user.",
-      "imageUrl": "https://images.unsplash.com/photo-1738429474664-c3a0f62192f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YWJzdHJhY3QlMjBkaWFncmFtfGVufDB8fHx8MTc2NzgxNzA1OXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "abstract diagram"
+      "description": "Agent robot at center connected to plan, bill, pharmacy and shield nodes",
+      "imageUrl": "/images/concierge-diagram.svg",
+      "imageHint": "agent network diagram illustration"
     },
     {
       "id": "features-hero",
-      "description": "A doctor and patient looking at a tablet together.",
-      "imageUrl": "https://images.unsplash.com/photo-1666214278797-b2cc1b12be76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkb2N0b3IlMjBwYXRpZW50fGVufDB8fHx8MTc2NzkwMzkyNHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "doctor patient"
+      "description": "Agent orchestrating multiple healthcare tasks in an orbit of icons",
+      "imageUrl": "/images/features-hero.svg",
+      "imageHint": "agent orchestration illustration"
     },
     {
       "id": "workerbrainsty-hero",

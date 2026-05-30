@@ -1,0 +1,79 @@
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Friendly agent robot guarding a person from surprise bills">
+  <!-- soft halo -->
+  <ellipse cx="320" cy="430" rx="240" ry="28" fill="#ffffff" opacity="0.12"/>
+
+  <!-- falling/deflected bill papers -->
+  <g opacity="0.95">
+    <g transform="rotate(-18 470 120)">
+      <rect x="436" y="86" width="78" height="98" rx="8" fill="#ffffff"/>
+      <rect x="436" y="86" width="78" height="22" rx="8" fill="#f59e0b"/>
+      <rect x="448" y="122" width="54" height="7" rx="3.5" fill="#c9ddf7"/>
+      <rect x="448" y="138" width="40" height="7" rx="3.5" fill="#c9ddf7"/>
+      <rect x="448" y="158" width="30" height="9" rx="4.5" fill="#f59e0b"/>
+    </g>
+    <g transform="rotate(22 540 220)">
+      <rect x="506" y="184" width="70" height="88" rx="8" fill="#e8f0fc"/>
+      <rect x="506" y="184" width="70" height="20" rx="8" fill="#f59e0b"/>
+      <rect x="518" y="216" width="46" height="6" rx="3" fill="#c9ddf7"/>
+      <rect x="518" y="230" width="34" height="6" rx="3" fill="#c9ddf7"/>
+    </g>
+  </g>
+
+  <!-- alert burst behind a blocked bill -->
+  <g transform="translate(498 90)">
+    <circle cx="0" cy="0" r="20" fill="#f59e0b"/>
+    <rect x="-3.5" y="-12" width="7" height="14" rx="3.5" fill="#ffffff"/>
+    <circle cx="0" cy="9" r="3.5" fill="#ffffff"/>
+  </g>
+
+  <!-- the person being protected -->
+  <g transform="translate(150 250)">
+    <ellipse cx="0" cy="168" rx="78" ry="16" fill="#ffffff" opacity="0.12"/>
+    <!-- body -->
+    <path d="M-46 168 C-46 96 -28 70 0 70 C28 70 46 96 46 168 Z" fill="#c9ddf7"/>
+    <rect x="-46" y="120" width="92" height="48" fill="#c9ddf7"/>
+    <!-- collar -->
+    <path d="M-16 74 L0 92 L16 74 Z" fill="#ffffff"/>
+    <!-- head -->
+    <circle cx="0" cy="36" r="34" fill="#e8f0fc"/>
+    <path d="M-34 30 C-34 8 -18 -4 0 -4 C18 -4 34 8 34 30 C24 18 -24 18 -34 30 Z" fill="#ffffff"/>
+    <!-- face -->
+    <circle cx="-12" cy="36" r="3.5" fill="#1c69d4"/>
+    <circle cx="12" cy="36" r="3.5" fill="#1c69d4"/>
+    <path d="M-10 50 Q0 58 10 50" stroke="#1c69d4" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- protective shield arc -->
+  <path d="M236 158 C300 96 360 96 372 250 C300 372 236 348 236 248 Z" fill="#1c69d4" opacity="0.18"/>
+  <path d="M250 168 C300 118 348 118 358 244 C300 344 250 322 250 244 Z" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- the AGENT robot, guarding -->
+  <g transform="translate(360 200)">
+    <!-- antenna -->
+    <line x1="0" y1="-18" x2="0" y2="-40" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="0" cy="-46" r="9" fill="#22c55e"/>
+
+    <!-- head -->
+    <rect x="-52" y="-18" width="104" height="86" rx="26" fill="#ffffff"/>
+    <rect x="-40" y="-2" width="80" height="50" rx="18" fill="#1c69d4"/>
+    <!-- eyes -->
+    <circle cx="-16" cy="24" r="9" fill="#ffffff"/>
+    <circle cx="16" cy="24" r="9" fill="#ffffff"/>
+    <circle cx="-14" cy="26" r="4" fill="#1c69d4"/>
+    <circle cx="18" cy="26" r="4" fill="#1c69d4"/>
+    <!-- ear pods -->
+    <rect x="-62" y="14" width="12" height="28" rx="6" fill="#c9ddf7"/>
+    <rect x="50" y="14" width="12" height="28" rx="6" fill="#c9ddf7"/>
+
+    <!-- body -->
+    <rect x="-58" y="74" width="116" height="96" rx="28" fill="#e8f0fc"/>
+    <rect x="-40" y="92" width="80" height="60" rx="16" fill="#ffffff"/>
+    <!-- chest shield emblem -->
+    <path d="M0 100 L24 110 L24 130 C24 144 12 152 0 158 C-12 152 -24 144 -24 130 L-24 110 Z" fill="#1c69d4"/>
+    <path d="M-9 130 l6 7 l13 -15" stroke="#ffffff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- guarding arm pushing the bill away -->
+    <rect x="44" y="84" width="62" height="20" rx="10" fill="#ffffff" transform="rotate(-22 44 94)"/>
+    <circle cx="104" cy="58" r="15" fill="#c9ddf7"/>
+  </g>
+</svg>

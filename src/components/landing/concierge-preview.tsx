@@ -12,34 +12,34 @@ export default function ConciergePreview() {
             <div className="container">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h2 className="text-[32px] md:text-[48px] font-bold font-display text-ink leading-[1.1]">Meet Wefella — Your Always-On Healthcare Guardian</h2>
+                        <h2 className="text-[32px] md:text-[48px] font-bold font-display text-ink leading-[1.1]">Meet Wefella — The Agent That Guards You While You Live Your Life</h2>
                         <p className="mt-6 text-[18px] font-light text-body leading-[1.55]">
-                            Not just a chatbot you visit when you have a question. Wefella is a continuous AI guardian that prevents financial harm before it happens, navigates the healthcare system for you, and fights unfair bills — in English, Spanish, and Portuguese.
+                            Not a chatbot you visit. An autonomous agent that hunts unfair charges, makes every price clear, and fights your bills for you — in English, Spanish, and Portuguese.
                         </p>
                         <ul className="mt-8 space-y-4 text-[16px] font-light text-body">
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
-                                <span>Prevent surprise bills and auto-build claims for every unfair charge</span>
+                                <span>Stops surprise bills and auto-builds a claim for every unfair charge</span>
                             </li>
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
-                                <span>Find real negotiated prices — not estimates — for any procedure or medication</span>
+                                <span>Finds the real negotiated price — never an estimate — for any procedure or drug</span>
                             </li>
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
-                                <span>Optimize your plan, employer benefits, and pharmacy costs year-round</span>
+                                <span>Guards your plan, employer benefits, and pharmacy costs all year</span>
                             </li>
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
-                                <span>Decide whether to use your plan or pay cash for medication and surgery</span>
+                                <span>Tells you when to use insurance and when cash is cheaper</span>
                             </li>
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
-                                <span>Get decomplicated scheduling at the best-value provider</span>
+                                <span>Books the best-value provider — no phone-tag</span>
                             </li>
                             <li className="flex items-start">
                                 <ArrowRight className="h-5 w-5 mt-1 mr-3 text-primary shrink-0" />
-                                <span className="font-bold text-ink italic">Auto-escalate denied claims with appeals, parity citations, and regulator complaints</span>
+                                <span className="font-bold text-ink italic">Escalates denied claims with appeals, parity citations, and regulator complaints</span>
                             </li>
                         </ul>
                         <Button asChild size="default" variant="default" className="mt-10">
@@ -55,7 +55,7 @@ export default function ConciergePreview() {
                                         alt={diagramImage.description}
                                         fill
                                         sizes="(max-width: 768px) 100vw, 50vw"
-                                        className="object-cover"
+                                        className="object-contain"
                                         data-ai-hint={diagramImage.imageHint}
                                     />
                                 </div>

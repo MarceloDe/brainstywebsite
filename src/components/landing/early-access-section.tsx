@@ -12,10 +12,10 @@ export default function EarlyAccessSection() {
                         Join the Waitlist
                     </h2>
                     <h3 className="text-[24px] text-on-dark-soft font-light mb-8 leading-[1.25]">
-                        Be First to Have a Healthcare Guardian
+                        Your Autonomous Health Agent Is Almost Ready
                     </h3>
                     <p className="text-on-dark-soft mb-10 text-[18px] font-light leading-[1.55]">
-                        We&apos;re expanding Wefella AI concierge access. Join the waitlist to stop guessing about your healthcare costs.
+                        We&apos;re opening access to the agent that guards your healthcare costs. Join the waitlist — stop guessing, start knowing.
                     </p>
 
                     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>

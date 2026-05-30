@@ -26,17 +26,17 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.logout": "Log out",
 
     // Hero Section
-    "hero.headline": "Your Healthcare Costs Shouldn't Be a Mystery",
-    "hero.sub": "Brainsty is an AI concierge that works for YOU — not insurers, not providers. Know your real costs before you pay. Prevent surprise bills before they arrive. Optimize your benefits before open enrollment ends.",
-    "hero.cta": "Get Early Access",
+    "hero.headline": "End the Mystery. Know the Truth Behind Every Bill.",
+    "hero.sub": "Brainsty is an autonomous health agent that works for YOU — not insurers, not providers. It guards your money, makes every price clear, and stops surprise bills before they reach you.",
+    "hero.cta": "Put Brainsty to Work",
     "hero.tagline": "Independent. White-label. No ties to any insurer or provider.",
 
     // Why Different Section
     "why.headline": "Why Brainsty Is Different",
     "why.card1.title": "100% Independent — White Label",
     "why.card1.body": "Brainsty has zero association with insurers, providers, or health services companies. We work for you. Period. No hidden incentives. No sponsored recommendations.",
-    "why.card2.title": "Always On, Always Watching",
-    "why.card2.body": "Not a chatbot you visit. A continuous guardian — monitoring your plan, tracking regulatory changes, flagging billing errors, and optimizing your benefits 24/7.",
+    "why.card2.title": "It Acts Before You Ask",
+    "why.card2.body": "Not a chatbot you visit. An autonomous agent that watches your plan, your bills, and your benefits 24/7 — catching savings and killing surprise charges before they reach you.",
     "why.card3.title": "Real Data, Not Estimates",
     "why.card3.body": "Powered by 5 billion+ actual negotiated rates from hospital transparency data, government databases, and regulatory filings. You see what things REALLY cost.",
     "why.card4.title": "Speaks Your Language",
@@ -54,9 +54,9 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Video Sections
     "video1.title": "Real-Time Healthcare Navigation",
-    "video1.desc": "Watch how our AI concierge navigates complex hospital billing, dynamically maps negotiated rates, and verifies price transparency data in milliseconds.",
+    "video1.desc": "Watch the agent navigate hospital billing, map real negotiated rates, and surface the truth in milliseconds.",
     "video2.title": "Independent Benefits Optimizer",
-    "video2.desc": "See our continuous guardian scanning regulatory filings and insurance plans to flag errors and recommend optimized benefits tailored to you."
+    "video2.desc": "See the agent scan regulatory filings and insurance plans — flagging errors and optimizing your benefits while you sleep."
   },
   es: {
     // Header & Navigation
@@ -73,17 +73,17 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.logout": "Cerrar sesión",
 
     // Hero Section
-    "hero.headline": "Los costos de su atención médica no deberían ser un misterio",
-    "hero.sub": "Brainsty es un conserje de IA que trabaja para USTED, no para aseguradoras ni proveedores. Conozca sus costos reales antes de pagar. Evite facturas sorpresa antes de que lleguen. Optimice sus beneficios antes de que termine la inscripción abierta.",
-    "hero.cta": "Obtener Acceso Temprano",
+    "hero.headline": "Acaba con el Misterio. Conoce la Verdad Detrás de Cada Factura.",
+    "hero.sub": "Brainsty es un agente de salud autónomo que trabaja para USTED, no para aseguradoras ni proveedores. Protege tu dinero, hace que cada precio sea claro y detiene las facturas sorpresa antes de que te lleguen.",
+    "hero.cta": "Pon a Brainsty a Trabajar",
     "hero.tagline": "Independiente. Marca blanca. Sin vínculos con ninguna aseguradora o proveedor.",
 
     // Why Different Section
     "why.headline": "Por Qué Brainsty es Diferente",
     "why.card1.title": "100% Independiente — Marca Blanca",
     "why.card1.body": "Brainsty no tiene ninguna asociación con aseguradoras, proveedores ni compañías de servicios de salud. Trabajamos para usted. Punto. Sin incentivos ocultos. Sin recomendaciones patrocinadas.",
-    "why.card2.title": "Siempre Activo, Siempre Vigilando",
-    "why.card2.body": "No es un chatbot que visitas ocasionalmente. Es un guardián continuo que monitorea tu plan, rastrea cambios regulatorios, alerta sobre errores de facturación y optimiza tus beneficios 24/7.",
+    "why.card2.title": "Actúa Antes de que Preguntes",
+    "why.card2.body": "No es un chatbot que visitas. Es un agente autónomo que vigila tu plan, tus facturas y tus beneficios 24/7 — capturando ahorros y eliminando cargos sorpresa antes de que te lleguen.",
     "why.card3.title": "Datos Reales, No Estimaciones",
     "why.card3.body": "Respaldado por más de 5 mil millones de tarifas negociadas reales de datos de transparencia hospitalaria, bases de datos gubernamentales y archivos regulatorios. Ves lo que las cosas REALMENTE cuestan.",
     "why.card4.title": "Habla Tu Idioma",
@@ -101,9 +101,9 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Video Sections
     "video1.title": "Navegación de Salud en Tiempo Real",
-    "video1.desc": "Vea cómo nuestro conserje de IA navega por la facturación hospitalaria compleja, mapea dinámicamente las tarifas negociadas y verifica los datos de transparencia de precios en milisegundos.",
+    "video1.desc": "Mira al agente navegar la facturación hospitalaria, mapear tarifas reales negociadas y revelar la verdad en milisegundos.",
     "video2.title": "Optimizador de Beneficios Independiente",
-    "video2.desc": "Vea a nuestro guardián continuo escanear archivos regulatorios y planes de seguro para señalar errores y recomendar beneficios optimizados adaptados a usted."
+    "video2.desc": "Mira al agente escanear documentos regulatorios y planes de seguro — señalando errores y optimizando tus beneficios mientras duermes."
   },
   pt: {
     // Header & Navigation
@@ -120,17 +120,17 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.logout": "Sair",
 
     // Hero Section
-    "hero.headline": "Os custos de sua saúde não deveriam ser um mistério",
-    "hero.sub": "Brainsty é um concierge de IA que trabalha para VOCÊ — não para seguradoras nem prestadores de serviços. Saiba seus custos reais antes de pagar. Previna cobranças surpresa antes que elas cheguem. Otimize seus benefícios antes do término do período de adesão.",
-    "hero.cta": "Obter Acesso Antecipado",
+    "hero.headline": "Acabe com o Mistério. Conheça a Verdade Por Trás de Cada Conta.",
+    "hero.sub": "A Brainsty é um agente de saúde autônomo que trabalha por VOCÊ — não pelas seguradoras nem pelos prestadores de serviços. Ele guarda seu dinheiro, torna cada preço claro e impede contas surpresa antes que cheguem até você.",
+    "hero.cta": "Coloque a Brainsty para Trabalhar",
     "hero.tagline": "Independente. Marca branca. Sem vínculos com nenhuma seguradora ou prestador.",
 
     // Why Different Section
     "why.headline": "Por Que a Brainsty é Diferente",
     "why.card1.title": "100% Independente — Marca Branca",
     "why.card1.body": "A Brainsty tem associação zero com seguradoras, prestadores ou empresas de serviços de saúde. Nós trabalhamos para você. Ponto final. Sem incentivos ocultos. Sem recomendações patrocinadas.",
-    "why.card2.title": "Sempre Ativo, Sempre Vigilante",
-    "why.card2.body": "Não é um chatbot que você visita ocasionalmente. É um guardião contínuo — monitorando seu plano, acompanhando mudanças regulatórias, sinalizando erros de faturamento e otimizando seus benefícios 24/7.",
+    "why.card2.title": "Ele Age Antes de Você Pedir",
+    "why.card2.body": "Não é um chatbot que você visita. É um agente autônomo que vigia seu plano, suas contas e seus benefícios 24/7 — capturando economias e eliminando cobranças surpresa antes que cheguem até você.",
     "why.card3.title": "Dados Reais, Não Estimativas",
     "why.card3.body": "Alimentado por mais de 5 bilhões de tarifas reais acordadas a partir de dados de transparência hospitalar, bancos de dados governamentais e registros regulatórios. Você vê o que as coisas REALMENTE custam.",
     "why.card4.title": "Fala a Sua Língua",
@@ -148,9 +148,9 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Video Sections
     "video1.title": "Navegação em Saúde em Tempo Real",
-    "video1.desc": "Assista como o nosso concierge de IA navega pelo faturamento hospitalar complexo, mapeia dinamicamente tarifas negociadas e verifica dados de transparência de preços em milissegundos.",
+    "video1.desc": "Veja o agente navegar pela cobrança hospitalar, mapear tarifas reais negociadas e revelar a verdade em milissegundos.",
     "video2.title": "Otimizador de Benefícios Independente",
-    "video2.desc": "Veja nosso guardião contínuo escanear registros regulatórios e planos de saúde para identificar erros e recomendar benefícios otimizados sob medida para você."
+    "video2.desc": "Veja o agente analisar documentos regulatórios e planos de seguro — sinalizando erros e otimizando seus benefícios enquanto você dorme."
   }
 };
 

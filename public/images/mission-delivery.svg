@@ -1,0 +1,36 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Performance gauge with upward arrow and a happy person">
+  <rect x="40" y="40" width="320" height="220" rx="20" fill="#f7f9fd"/>
+
+  <!-- gauge dashboard -->
+  <g transform="translate(150 178)">
+    <path d="M-86 0 A86 86 0 0 1 86 0" fill="none" stroke="#e8f0fc" stroke-width="20" stroke-linecap="round"/>
+    <path d="M-86 0 A86 86 0 0 1 60 -62" fill="none" stroke="#1c69d4" stroke-width="20" stroke-linecap="round"/>
+    <!-- ticks -->
+    <g stroke="#c9ddf7" stroke-width="4" stroke-linecap="round">
+      <line x1="-66" y1="-44" x2="-56" y2="-37"/>
+      <line x1="0" y1="-70" x2="0" y2="-58"/>
+      <line x1="66" y1="-44" x2="56" y2="-37"/>
+    </g>
+    <!-- needle pointing up-right (high) -->
+    <line x1="0" y1="0" x2="44" y2="-46" stroke="#1c69d4" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="11" fill="#1c69d4"/>
+    <circle cx="0" cy="0" r="4" fill="#ffffff"/>
+  </g>
+
+  <!-- upward optimize arrow -->
+  <g transform="translate(258 120)">
+    <circle cx="0" cy="0" r="46" fill="#22c55e" opacity="0.15"/>
+    <path d="M-22 18 L0 -20 L22 18" fill="none" stroke="#22c55e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M0 -20 L0 24" stroke="#22c55e" stroke-width="9" stroke-linecap="round"/>
+  </g>
+
+  <!-- happy person -->
+  <g transform="translate(96 90)">
+    <circle cx="0" cy="0" r="22" fill="#e8f0fc"/>
+    <path d="M-22 -2 C-22 -16 -10 -24 0 -24 C10 -24 22 -16 22 -2 C14 -10 -14 -10 -22 -2 Z" fill="#1c69d4"/>
+    <circle cx="-8" cy="2" r="2.6" fill="#1c69d4"/>
+    <circle cx="8" cy="2" r="2.6" fill="#1c69d4"/>
+    <path d="M-7 11 Q0 17 7 11" stroke="#1c69d4" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <path d="M-18 36 C-18 22 -8 18 0 18 C8 18 18 22 18 36 Z" fill="#c9ddf7"/>
+  </g>
+</svg>
