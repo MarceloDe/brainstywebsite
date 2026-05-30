@@ -47,7 +47,7 @@ export default function ConciergePreview() {
                         </Button>
                     </div>
                     <div>
-                        <div className="bg-canvas p-6">
+                        <div className="bg-canvas p-6 ag-float-slow ag-drift-left">
                             {diagramImage && (
                                 <div className="aspect-video relative rounded-none w-full">
                                     <Image

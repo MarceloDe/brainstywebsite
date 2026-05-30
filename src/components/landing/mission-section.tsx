@@ -36,14 +36,20 @@ export default function MissionSection() {
         </div>
 
         <div className="mt-16 grid md:grid-cols-3 gap-8">
-          {pillars.map((pillar) => {
+          {pillars.map((pillar, index) => {
             const image = PlaceHolderImages.find(
               (img) => img.id === pillar.imageId
             );
+            const floatClasses = [
+              "ag-float-slow ag-drift-left",
+              "ag-float-medium ag-drift-right",
+              "ag-float-slow ag-drift-right"
+            ];
+            const animationClass = floatClasses[index % floatClasses.length];
             return (
               <div
                 key={pillar.title}
-                className="flex flex-col group bg-canvas"
+                className={`flex flex-col group bg-canvas ${animationClass}`}
               >
                 {image && (
                   <div className="relative h-[240px] w-full">

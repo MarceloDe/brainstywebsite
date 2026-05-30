@@ -10,3 +10,83 @@
     @apply bg-canvas text-body font-light;
   }
 }
+
+/* ==========================================================================
+   Antigravity Micro-Interaction Layer
+   Injects floating physics without modifying core page layouts.
+   ========================================================================== */
+
+:root {
+  --ag-float-distance-sm: -6px;
+  --ag-float-distance-md: -12px;
+  --ag-float-distance-lg: -20px;
+  --ag-curve: cubic-bezier(0.45, 0.05, 0.55, 0.95); /* Ultra-smooth sine-wave curve */
+}
+
+/* Base Utility Classes: Apply these to any element to make them weightless */
+.ag-float-slow {
+  animation: antigravityFloatY 7s var(--ag-curve) infinite alternate;
+  will-change: transform;
+}
+
+.ag-float-medium {
+  animation: antigravityFloatY 5s var(--ag-curve) infinite alternate;
+  will-change: transform;
+}
+
+.ag-float-fast {
+  animation: antigravityFloatY 3.5s var(--ag-curve) infinite alternate;
+  will-change: transform;
+}
+
+/* Staggered Secondary Axis (Adds subtle horizontal drifting for high-end realism) */
+.ag-drift-left {
+  animation: antigravityDriftXLeft 9s var(--ag-curve) infinite alternate;
+}
+
+.ag-drift-right {
+  animation: antigravityDriftXRight 11s var(--ag-curve) infinite alternate;
+}
+
+/* --------------------------------------------------------------------------
+   Hardware-Accelerated Physics Keyframes
+   Uses backface-visibility and translate3d to offload rendering to the GPU.
+   -------------------------------------------------------------------------- */
+
+@keyframes antigravityFloatY {
+  0% {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+  100% {
+    transform: translate3d(0, var(--ag-float-distance-md), 0);
+    backface-visibility: hidden;
+  }
+}
+
+@keyframes antigravityDriftXLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-8px, 0, 0) rotate(-1deg);
+  }
+}
+
+@keyframes antigravityDriftXRight {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(8px, 0, 0) rotate(1deg);
+  }
+}
+
+/* Reduced Motion Override for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .ag-float-slow, .ag-float-medium, .ag-float-fast, .ag-drift-left, .ag-drift-right {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+

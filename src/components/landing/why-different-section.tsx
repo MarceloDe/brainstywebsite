@@ -39,11 +39,19 @@ export default function WhyDifferentSection() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12">
-                    {differentiators.map((item, index) => (
-                        <div 
-                            key={index} 
-                            className="flex gap-6 p-6 rounded-none transition-all duration-300 border border-hairline hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_10px_30px_-15px_rgba(28,105,212,0.15)] bg-canvas group"
-                        >
+                    {differentiators.map((item, index) => {
+                        const floatClasses = [
+                            "ag-float-slow ag-drift-left",
+                            "ag-float-medium ag-drift-right",
+                            "ag-float-medium ag-drift-left",
+                            "ag-float-slow ag-drift-right"
+                        ];
+                        const animationClass = floatClasses[index % floatClasses.length];
+                        return (
+                            <div 
+                                key={index} 
+                                className={`flex gap-6 p-6 rounded-none transition-all duration-300 border border-hairline hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_10px_30px_-15px_rgba(28,105,212,0.15)] bg-canvas group ${animationClass}`}
+                            >
                             <div className="shrink-0 pt-1">
                                 {item.icon}
                             </div>
@@ -56,7 +64,8 @@ export default function WhyDifferentSection() {
                                 </p>
                             </div>
                         </div>
-                    ))}
+                    );
+                })}
                 </div>
             </div>
         </section>

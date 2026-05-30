@@ -50,7 +50,13 @@ const translations: Record<Language, Record<string, string>> = {
     "emp.f2": "Per-employee-per-month pricing — predictable, scalable",
     "emp.f3": "Benefits consultant partnership program",
     "emp.f4": "HIPAA-compliant architecture",
-    "emp.f5": "Multilingual support (English, Spanish, Portuguese)"
+    "emp.f5": "Multilingual support (English, Spanish, Portuguese)",
+
+    // Video Sections
+    "video1.title": "Real-Time Healthcare Navigation",
+    "video1.desc": "Watch how our AI concierge navigates complex hospital billing, dynamically maps negotiated rates, and verifies price transparency data in milliseconds.",
+    "video2.title": "Independent Benefits Optimizer",
+    "video2.desc": "See our continuous guardian scanning regulatory filings and insurance plans to flag errors and recommend optimized benefits tailored to you."
   },
   es: {
     // Header & Navigation
@@ -91,7 +97,13 @@ const translations: Record<Language, Record<string, string>> = {
     "emp.f2": "Precios por empleado al mes: predecibles y escalables",
     "emp.f3": "Programa de asociación para consultores de beneficios",
     "emp.f4": "Arquitectura que cumple con HIPAA",
-    "emp.f5": "Soporte multilingüe (inglés, español, portugués)"
+    "emp.f5": "Soporte multilingüe (inglés, español, portugués)",
+
+    // Video Sections
+    "video1.title": "Navegación de Salud en Tiempo Real",
+    "video1.desc": "Vea cómo nuestro conserje de IA navega por la facturación hospitalaria compleja, mapea dinámicamente las tarifas negociadas y verifica los datos de transparencia de precios en milisegundos.",
+    "video2.title": "Optimizador de Beneficios Independiente",
+    "video2.desc": "Vea a nuestro guardián continuo escanear archivos regulatorios y planes de seguro para señalar errores y recomendar beneficios optimizados adaptados a usted."
   },
   pt: {
     // Header & Navigation
@@ -132,7 +144,13 @@ const translations: Record<Language, Record<string, string>> = {
     "emp.f2": "Preço por funcionário por mês — previsível e escalável",
     "emp.f3": "Programa de parceria para consultores de benefícios",
     "emp.f4": "Arquitetura em conformidade com a HIPAA",
-    "emp.f5": "Suporte multilíngue (inglês, espanhol, português)"
+    "emp.f5": "Suporte multilíngue (inglês, espanhol, português)",
+
+    // Video Sections
+    "video1.title": "Navegação em Saúde em Tempo Real",
+    "video1.desc": "Assista como o nosso concierge de IA navega pelo faturamento hospitalar complexo, mapeia dinamicamente tarifas negociadas e verifica dados de transparência de preços em milissegundos.",
+    "video2.title": "Otimizador de Benefícios Independente",
+    "video2.desc": "Veja nosso guardião contínuo escanear registros regulatórios e planos de saúde para identificar erros e recomendar benefícios otimizados sob medida para você."
   }
 };
 
