@@ -1,46 +1,56 @@
-import { Shield, Eye, Database, Globe } from "lucide-react";
+"use client";
 
-const differentiators = [
-    {
-        icon: <Shield className="h-10 w-10 text-primary" />,
-        title: "100% Independent — White Label",
-        body: "Brainsty has zero association with insurers, providers, or health services companies. We work for you. Period. No hidden incentives. No sponsored recommendations.",
-    },
-    {
-        icon: <Eye className="h-10 w-10 text-primary" />,
-        title: "Always On, Always Watching",
-        body: "Not a chatbot you visit. A continuous guardian — monitoring your plan, tracking regulatory changes, flagging billing errors, and optimizing your benefits 24/7.",
-    },
-    {
-        icon: <Database className="h-10 w-10 text-primary" />,
-        title: "Real Data, Not Estimates",
-        body: "Powered by 5 billion+ actual negotiated rates from hospital transparency data, government databases, and regulatory filings. You see what things REALLY cost.",
-    },
-    {
-        icon: <Globe className="h-10 w-10 text-primary" />,
-        title: "Speaks Your Language",
-        body: "Available in English, Spanish, and Portuguese. Because healthcare confusion shouldn't have a language barrier.",
-    },
-];
+import { Shield, Eye, Database, Globe } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
 export default function WhyDifferentSection() {
+    const { t } = useLanguage();
+
+    const differentiators = [
+        {
+            icon: <Shield className="h-10 w-10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />,
+            title: t("why.card1.title"),
+            body: t("why.card1.body"),
+        },
+        {
+            icon: <Eye className="h-10 w-10 text-primary transition-transform duration-300 group-hover:scale-110" />,
+            title: t("why.card2.title"),
+            body: t("why.card2.body"),
+        },
+        {
+            icon: <Database className="h-10 w-10 text-primary transition-transform duration-300 group-hover:scale-110" />,
+            title: t("why.card3.title"),
+            body: t("why.card3.body"),
+        },
+        {
+            icon: <Globe className="h-10 w-10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />,
+            title: t("why.card4.title"),
+            body: t("why.card4.body"),
+        },
+    ];
+
     return (
         <section id="why-brainsty" className="py-[80px] bg-canvas">
             <div className="container">
                 <div className="text-center max-w-3xl mx-auto mb-[80px]">
                     <h2 className="text-[48px] font-bold font-display text-ink leading-[1.1]">
-                        Why Brainsty Is Different
+                        {t("why.headline")}
                     </h2>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12">
                     {differentiators.map((item, index) => (
-                        <div key={index} className="flex gap-6 p-6 rounded-none transition-all border border-hairline hover:border-hairline-strong bg-canvas">
+                        <div 
+                            key={index} 
+                            className="flex gap-6 p-6 rounded-none transition-all duration-300 border border-hairline hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_10px_30px_-15px_rgba(28,105,212,0.15)] bg-canvas group"
+                        >
                             <div className="shrink-0 pt-1">
                                 {item.icon}
                             </div>
                             <div>
-                                <h3 className="text-[20px] font-bold font-display text-ink leading-[1.3] mb-3">{item.title}</h3>
+                                <h3 className="text-[20px] font-bold font-display text-ink leading-[1.3] mb-3 group-hover:text-primary transition-colors duration-300">
+                                    {item.title}
+                                </h3>
                                 <p className="text-[16px] font-light text-body leading-[1.55]">
                                     {item.body}
                                 </p>

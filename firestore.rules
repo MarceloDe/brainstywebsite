@@ -3,31 +3,32 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     
-    // Starred Repos Collection
+    // Starred Repos Collection (Read-only for map views, write blocked for clients)
     match /starred_repos/{repoId} {
-      // Version A: Publicly readable for everyone
       allow read: if true;
-      
-      // Allow writes ONLY IF authenticated (simple protection)
-      // For more security, restrict to a specific admin UID
-      allow write: if request.auth != null;
+      allow write: if false;
     }
 
-    // Users Profile Collection
+    // Users Profile Collection (Strict user isolation & nested collections safety)
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Protects all sub-collections (e.g., chat messages, scan logs) recursively
+      match /{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
     }
     
-    // Config Collection
+    // Config Collection (Read-only for authenticated clients, write locked)
     match /config/{configId} {
-      // Only authenticated users can read/write config (e.g., token)
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if false;
     }
     
-    // Sync State
+    // Sync State (Publicly readable, write locked for client tampering protection)
     match /config/sync_state {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if false;
     }
   }
 }

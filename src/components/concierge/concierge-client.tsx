@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { aiConciergeAssistance } from '@/ai/flows/ai-concierge-assistance';
 import { useAuth } from '@/context/auth-context';
+import { useLanguage } from '@/context/language-context';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { doc, setDoc, updateDoc, getDoc } from 'firebase/firestore';
@@ -52,6 +53,7 @@ interface UiComponent {
 
 export default function ConciergeClient() {
   const { user } = useAuth();
+  const { language } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
@@ -175,7 +177,7 @@ export default function ConciergeClient() {
     setIsLoading(true);
 
     try {
-      const response = await aiConciergeAssistance({ query: textToSend });
+      const response = await aiConciergeAssistance({ query: textToSend, language });
       const assistantMessage: Message = { 
         id: Math.random().toString(), 
         role: 'assistant', 

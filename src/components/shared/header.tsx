@@ -4,8 +4,9 @@ import Link from "next/link";
 import { BrainstyLogo } from "@/components/shared/icons";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, User } from "lucide-react";
+import { Menu, User, Globe } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
+import { useLanguage } from "@/context/language-context";
 import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
@@ -19,6 +20,7 @@ import { useState } from "react";
 
 export default function Header() {
   const { user, logout, isLoading } = useAuth();
+  const { language, setLanguage, t } = useLanguage();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -30,22 +32,22 @@ export default function Header() {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   const activeLinks = user ? [
-    { href: "/concierge", label: "Wefella Chat" },
-    { href: "/research", label: "Curated Research" },
-    { href: "/repos", label: "Intelligence Map" },
-    { href: "/workerbrainsty", label: "Cognitive AI" },
+    { href: "/concierge", label: t("nav.wefellaChat") },
+    { href: "/research", label: t("nav.curatedResearch") },
+    { href: "/repos", label: t("nav.intelligenceMap") },
+    { href: "/workerbrainsty", label: t("nav.cognitiveAi") },
   ] : [
-    { href: "/#how-it-works", label: "How It Works" },
-    { href: "/#your-shield", label: "Your Shield" },
-    { href: "/#why-brainsty", label: "Why Brainsty" },
-    { href: "/#for-employers", label: "For Employers" },
-    { href: "/workerbrainsty", label: "Cognitive AI" },
+    { href: "/#how-it-works", label: t("nav.howItWorks") },
+    { href: "/#your-shield", label: t("nav.yourShield") },
+    { href: "/#why-brainsty", label: t("nav.whyBrainsty") },
+    { href: "/#for-employers", label: t("nav.forEmployers") },
+    { href: "/workerbrainsty", label: t("nav.cognitiveAi") },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-hairline bg-canvas">
+    <header className="sticky top-0 z-50 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md">
       <div className="container flex h-[64px] max-w-screen-2xl items-center">
-        <Link href="/" className="mr-6 flex items-center space-x-2">
+        <Link href="/" className="mr-6 flex items-center space-x-2 transition-transform duration-300 hover:scale-[1.02] hover:opacity-90">
           <BrainstyLogo className="h-8 w-8 text-ink" />
           <span className="text-[20px] font-bold font-display text-ink sm:inline-block">
             Brainsty
@@ -56,7 +58,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[14px] font-normal tracking-[0.3px] text-ink transition-colors hover:text-primary"
+              className="text-[14px] font-normal tracking-[0.3px] text-ink transition-colors duration-300 hover:text-primary"
               onClick={closeMobileMenu}
             >
               {link.label}
@@ -64,6 +66,26 @@ export default function Header() {
           ))}
         </nav>
         <div className="flex flex-1 items-center justify-end space-x-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full transition-transform duration-300 hover:scale-105">
+                <Globe className="h-5 w-5 text-ink" />
+                <span className="sr-only">Select Language</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-36 bg-canvas border border-hairline">
+              <DropdownMenuItem onClick={() => setLanguage("en")} className="flex items-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-surface-soft">
+                <span>🇺🇸</span> <span className={language === "en" ? "font-bold text-primary" : "text-ink"}>English</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage("es")} className="flex items-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-surface-soft">
+                <span>🇪🇸</span> <span className={language === "es" ? "font-bold text-primary" : "text-ink"}>Español</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage("pt")} className="flex items-center gap-2 cursor-pointer transition-colors duration-200 hover:bg-surface-soft">
+                <span>🇧🇷</span> <span className={language === "pt" ? "font-bold text-primary" : "text-ink"}>Português</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {isLoading ? (
             <div className="h-9 w-20 animate-pulse rounded-md bg-muted" />
           ) : user ? (
