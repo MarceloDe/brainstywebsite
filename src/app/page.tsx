@@ -19,7 +19,7 @@ export default function Home() {
       </ScrollReveal>
 
       <VideoSection 
-        videoSrc="/api/video/video1" 
+        videoSrc="/video1.mp4" 
         titleKey="video1.title" 
         descKey="video1.desc" 
         bgColor="surface-soft" 
@@ -42,7 +42,7 @@ export default function Home() {
       </ScrollReveal>
 
       <VideoSection 
-        videoSrc="/api/video/video2" 
+        videoSrc="/video2.mp4" 
         titleKey="video2.title" 
         descKey="video2.desc" 
         bgColor="surface-dark" 
