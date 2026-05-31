@@ -1,14 +1,20 @@
 'use server';
 /**
- * @fileOverview An AI concierge flow to simulate an expert healthcare concierge.
+ * @fileOverview Wefella concierge flow.
  *
- * - aiConciergeAssistance - A function that handles the AI concierge assistance process.
- * - AiConciergeAssistanceInput - The input type for the aiConciergeAssistance function.
- * - AiConciergeAssistanceOutput - The return type for the aiConciergeAssistance function.
+ * The model is harnessed to return a SHORT (<=30 word) textual gist plus a
+ * structured "widget intent". A deterministic compiler (see ../a2ui/compiler)
+ * turns that intent into a valid A2UI v0.9 message array which the client
+ * renders with @a2ui/react. This guarantees that whenever the reply implies an
+ * action, choice, or sequence, a clickable/visual interface is produced.
+ *
+ * - aiConciergeAssistance - entry point used by the concierge client.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {compileWidget, clampWords, WidgetIntentSchema, type A2uiMessage} from '@/ai/a2ui/compiler';
+import {CONCIERGE_SURFACE_ID} from '@/ai/a2ui/catalog';
 
 const AiConciergeAssistanceInputSchema = z.object({
   query: z.string().describe('The user query for the AI concierge.'),
@@ -16,84 +22,66 @@ const AiConciergeAssistanceInputSchema = z.object({
 });
 export type AiConciergeAssistanceInput = z.infer<typeof AiConciergeAssistanceInputSchema>;
 
-const UiPropsSchema = z.object({
-  title: z.string().optional(),
-  fields: z.array(z.string()).optional(),
-  question: z.string().optional(),
-  options: z.array(z.string()).optional(),
-  name: z.string().optional(),
-  age: z.number().optional(),
-  insurance: z.string().optional(),
-  memberId: z.string().optional(),
-  groupNumber: z.string().optional(),
-  status: z.string().optional(),
-}).describe('The properties for the A2UI component.');
+// What the LLM is asked to produce.
+const ModelOutputSchema = z.object({
+  response: z
+    .string()
+    .describe('The gist reply. MAXIMUM 30 words. No markdown. Plain, warm, jargon-free.'),
+  widget: WidgetIntentSchema.describe(
+    'The interactive interface to render alongside the reply.'
+  ),
+});
 
-const UiComponentSchema = z.object({
-  type: z.enum(['profile-form', 'poll', 'yes-no', 'insurance-card']).describe('The A2UI component type to render.'),
-  props: UiPropsSchema,
-}).optional();
-
+// What the flow returns to the client: text + ready-to-render A2UI messages.
 const AiConciergeAssistanceOutputSchema = z.object({
-  response: z.string().describe('The textual response from the AI concierge.'),
-  uiComponent: UiComponentSchema,
+  response: z.string(),
+  a2ui: z.array(z.any()).describe('A2UI v0.9 messages, ready for the renderer. May be empty.'),
 });
 export type AiConciergeAssistanceOutput = z.infer<typeof AiConciergeAssistanceOutputSchema>;
 
-export async function aiConciergeAssistance(input: AiConciergeAssistanceInput): Promise<AiConciergeAssistanceOutput> {
+export async function aiConciergeAssistance(
+  input: AiConciergeAssistanceInput
+): Promise<AiConciergeAssistanceOutput> {
   return aiConciergeAssistanceFlow(input);
 }
 
 const prompt = ai.definePrompt({
   name: 'aiConciergeAssistancePrompt',
   input: {schema: AiConciergeAssistanceInputSchema},
-  output: {schema: AiConciergeAssistanceOutputSchema},
+  output: {schema: ModelOutputSchema},
   prompt: `You are Wefella, an expert healthcare concierge and autonomous resident of Brainsty.
-Your goal is to guide the user through setting up their "Brainsty Healthcare Shield" and resolving their queries.
 
-You MUST communicate with the user interactively, leveraging the A2UI dynamic user interface rendering protocol.
+### HARD RULES
+1. "response": 30 words OR FEWER. Plain prose, no markdown, no lists, no repetition. State only the gist.
+2. NEVER list options, steps, or buttons inside "response" — those belong in "widget" only.
+3. "widget.title": a SHORT heading, max 8 words. Do NOT put sentences, disclaimers, or option text here.
+4. Do not repeat yourself anywhere. Be concise.
 
-### MULTILINGUAL PROTOCOL
-You MUST communicate and respond to the user in their active language: {{{language}}} (default is English). Provide ALL textual responses, card labels, questions, and option fields in that specified language.
-- English -> Communicate in English (EN)
-- Spanish -> Communicate in Spanish (ES)
-- Portuguese -> Communicate in Portuguese (PT)
+### WIDGET (how the user interacts)
+- kind="actions": use whenever the user could do something next (the common case). Provide 2-4 options. Each option: short "label" (max 5 words), a lucide-react "icon" (e.g. Search, Calendar, Activity, Heart, ShieldCheck, Video, FileText, DollarSign, Stethoscope, Pill, Upload), and optional "value".
+- kind="steps": use to explain a SEQUENCE. Provide 2-5 steps, each a short "label" + optional "detail" + lucide "icon".
+- kind="confirm": a yes/no decision. Provide "question".
+- kind="info": ONLY when there is truly nothing to act on.
 
-### A2UI WORKFLOW CONSTRAINTS & PROTOCOL
-You have a set of dynamic UI widgets available to present to the user. You can return ONE widget at a time inside the "uiComponent" field of your output:
+### MULTILINGUAL
+Respond in the user's active language: {{{language}}} (default English). Translate ALL labels, titles, options. Do NOT translate lucide icon names.
 
-1. "profile-form": Use this at the very beginning to collect the user's base information.
-   Props:
-   - title: e.g. "Create Your Guardian Profile" (Translate to active language!)
-   - fields: ["name", "age", "insurance"] (Do not translate raw field identifiers, but translate any other props)
+### PERSONA
+Warm, clear, protective. You guard the user's money, expose real prices, and stop surprise bills.
 
-2. "poll": Use this to let them choose between key tasks once they register.
-   Props:
-   - question: e.g. "What would you like Wefella to shield you from today?" (Translate to active language!)
-   - options: e.g. ["Find real negotiated prices", "Fight an emergency surprise bill", "Scan a medical bill (PDF)", "Optimize employer benefits"] (Translate all options to active language!)
-
-3. "yes-no": Use this for simple binary checks.
-   Props:
-   - question: string (e.g. "Would you like me to analyze that cost against hospital negotiated rates?", Translate to active language!)
-
-4. "insurance-card": Use this to reward them once they complete their profile!
-   Props:
-   - name: string (user's name)
-   - age: number (user's age)
-   - insurance: string (insurance provider)
-   - memberId: string (generate a cool unique id starting with "BRN-")
-   - groupNumber: string (generate a cool group code)
-   - status: "SHIELD ACTIVE" (Translate "SHIELD ACTIVE" status to active language!)
-
-### GUIDELINES
-- If the user query is welcoming or starting, welcome them and prompt them to fill in their profile using the "profile-form" component.
-- If they provide profile data (e.g., "My name is John, I'm 32, on Aetna"), congratulate them and present their "insurance-card" as a consolidated visual, then offer a "poll" to choose their next step.
-- Keep your textual responses warm, clear, professional, and desaturated of complex jargon. Never output markdown code blocks.
-
-User Query: {{{query}}}`
+User Query: {{{query}}}`,
 });
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const FALLBACK = (msg: string): AiConciergeAssistanceOutput => {
+  const widget = {
+    kind: 'actions' as const,
+    title: undefined,
+    options: [{label: 'Try again', value: 'Hello', icon: 'RefreshCw'}],
+  };
+  return {response: msg, a2ui: compileWidget(CONCIERGE_SURFACE_ID, widget) as A2uiMessage[]};
+};
 
 const aiConciergeAssistanceFlow = ai.defineFlow(
   {
@@ -101,7 +89,7 @@ const aiConciergeAssistanceFlow = ai.defineFlow(
     inputSchema: AiConciergeAssistanceInputSchema,
     outputSchema: AiConciergeAssistanceOutputSchema,
   },
-  async input => {
+  async (input) => {
     let retries = 3;
     let delay = 1000;
 
@@ -109,26 +97,24 @@ const aiConciergeAssistanceFlow = ai.defineFlow(
       try {
         const {output} = await prompt(input);
         if (output) {
-          return output;
+          return {
+            response: clampWords(output.response, 40),
+            a2ui: compileWidget(CONCIERGE_SURFACE_ID, output.widget),
+          };
         }
       } catch (err: any) {
         console.warn(`Gemini API call failed (retries left: ${retries - 1}):`, err?.message || err);
         retries--;
         if (retries === 0) {
-          // If all retries fail, return a structured fallback response rather than crashing
-          return {
-            response: "Wefella is currently experiencing a high volume of requests from other members. My healthcare shield brain is slightly overloaded right now, but I am still actively guarding your dashboard. Please try sending your message again in a few seconds!",
-            uiComponent: undefined
-          };
+          return FALLBACK(
+            "Wefella's shield brain is briefly overloaded. I'm still guarding your dashboard — try again in a moment."
+          );
         }
         await sleep(delay);
-        delay *= 2; // Exponential backoff delay
+        delay *= 2;
       }
     }
 
-    return {
-      response: "Wefella is currently experiencing a high volume of requests. Please try again shortly.",
-      uiComponent: undefined
-    };
+    return FALLBACK('Wefella is experiencing high volume right now. Please try again shortly.');
   }
 );

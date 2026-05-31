@@ -1,10 +1,10 @@
-import ConciergeClient from "@/components/concierge/concierge-client";
+import ConciergeExperience from "@/components/concierge/experience";
 import ProtectedRoute from "@/components/auth/protected-route";
 
 export default function ConciergePage() {
     return (
         <ProtectedRoute>
-            <ConciergeClient />
+            <ConciergeExperience />
         </ProtectedRoute>
     );
 }
